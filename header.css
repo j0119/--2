@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.frontpage {
+    background-color: #E8D1BF;
+}
+
+header {
+    display: flex;
+
+    padding: 0 10px;
+    background-color: #463730;
+}
+
+header .logo {
+    height: 40px;
+    width: auto;
+    display: inline-block;
+    padding: 6px 0;
+}
+
+header .logo img {
+    height: 100%;
+    width: auto;
+    display: block;
+}
+
+
+header nav {
+    text-align: right;
+    width: 100%;
+    font-size: 0;
+
+}
+
+header nav a {
+    font-size: 15px;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    line-height: 50px;
+    padding: 0 10px;
+
+}
+
+header nav a:hover {
+    background-color: #DAA058;
+}
+
+footer {
+    height: 100px;
+    background-color: #463730;
+}
+
+.footertext {
+    font-size: 20px;
+    color: #fff;
+}

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="header.css">
+    <style>
+        #adoptionSteps {
+            display: none;
+        }
+
+        .filter label {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 10px;
+
+            cursor: pointer;
+        }
+
+        .aa {
+            width: 200px;
+            border: 2px solid #aaa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+
+
+        }
+
+        .pic {
+            position: relative;
+
+        }
+
+        .pic>img {
+            width: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+
+
+        <a class="logo" href="#"><img src="./圖庫/圖庫/pexels-mikhail-nilov-7474467.jpg" alt="logo"></a>
+
+        <nav>
+            <a href="#">登入</a>
+            <a href="#">測驗</a>
+            <a href="#">帶我回家</a>
+            <a href="#">交流平台</a>
+            <a href="#">寵物百科</a>
+        </nav>
+    </header>
+    <div class="search">
+        <input type="text" name="searchData"><input type="button" value="查詢">
+        <input type="button" id="btnProcess" value="收養流程 ? ">
+        <div id="adoptionSteps">
+            以下是領養的步驟：
+            1. 查看等待領養的寵物
+
+            2. 填寫領養諮詢表
+
+            3. 參加寵物合夥人會員（以利機構連絡您）
+
+            4. 寵物合夥人的安置專員將安排您與寵物見面、進行面談和參觀您的家（面對面或線上）
+
+            5. 如果適合，我們會安排一個星期的試養
+
+            6. 如果試養順利，我們會請您簽署領養合約
+
+            認養資格：
+            · 須年滿 20 歲（男性須役畢）並且有照顧寵物的經濟能力
+
+            · 領養者必須同意永遠善待寵物，並確保寵物的健康與安全
+
+            有其他問題嗎？
+            請寫信到 aaaaaaaaaa@gmail.給我們。
+        </div>
+
+
+
+        <div class="filter">
+            <div class="species">
+                <h3>寵物種類</h3>
+
+                <input type="radio" id="species1" name="species">
+                <label for="species1">狗狗</label>
+
+                <input type="radio" id="species2" name="species">
+                <label for="species2">貓咪</label>
+
+                <input type="radio" id="species3" name="species">
+                <label for="species3">倉鼠</label>
+
+            </div>
+
+            <div class="sex">
+                <h3>性別</h3>
+                <input type="radio" id="sex1" name="sex">
+                <label for="sex1">弟弟</label>
+
+                <input type="radio" id="sex2" name="sex">
+                <label for="sex2">妹妹</label>
+            </div>
+            <div class="age">
+                <h3>年齡</h3>
+                <input type="radio" id="age1" name="age">
+                <label for="age1">小朋友</label>
+
+                <input type="radio" id="age2" name="age">
+                <label for="age2">青壯年</label>
+
+                <input type="radio" id="age3" name="age">
+                <label for="age3">退休狀態</label>
+
+            </div>
+            <div class="size">
+                <h3>體型</h3>
+                <input type="radio" id="size1" name="size">
+                <label for="size1">0-5公斤</label>
+
+                <input type="radio" id="size2" name="size">
+                <label for="size2">5-10公斤</label>
+
+                <input type="radio" id="size3" name="size">
+                <label for="size3">10公斤以上</label>
+            </div>
+        </div>
+        <div>
+            <input type="button" id="btReset" value="重置 ">
+        </div>
+    </div>
+
+
+    <div class="cards">
+        <div class="aa">
+            <div class="card dog1">
+                <div class="pic">
+                    <img src="https://picsum.photos/300/200/?random=10">
+                </div>
+                <div class="txt">
+                    <h3>小明</h3>
+                    <h4>分類 : 汪星人</h4>
+                    <input type="button" id="bntFiles" value="檔案 ">
+                </div>
+            </div>
+            <div class="card dog1">
+                <div class="pic">
+                    <img src="https://picsum.photos/300/200/?random=11">
+                </div>
+                <div class="txt">
+                    <h3>小明</h3>
+                    <h4>分類 : 汪星人</h4>
+                    <input type="button" id="bntFiles" value="檔案 ">
+                </div>
+            </div>
+            <div class="card dog1">
+                <div class="pic">
+                    <img src="https://picsum.photos/300/200/?random=12">
+                </div>
+                <div class="txt">
+                    <h3>小明</h3>
+                    <h4>分類 : 汪星人</h4>
+                    <input type="button" id="bntFiles" value="檔案 ">
+                </div>
+            </div>
+        </div>
+        <div class="aa">
+            <div class="card dog1">
+                <div class="pic">
+                    <img src="https://picsum.photos/300/200/?random=10">
+                </div>
+                <div class="txt">
+                    <h3>小明</h3>
+                    <h4>分類 : 汪星人</h4>
+                    <input type="button" id="bntFiles" value="檔案 ">
+                </div>
+            </div>
+            <div class="card dog1">
+                <div class="pic">
+                    <img src="https://picsum.photos/300/200/?random=11">
+                </div>
+                <div class="txt">
+                    <h3>小明</h3>
+                    <h4>分類 : 汪星人</h4>
+                    <input type="button" id="bntFiles" value="檔案 ">
+                </div>
+            </div>
+            <div class="card dog1">
+                <div class="pic">
+                    <img src="https://picsum.photos/300/200/?random=12">
+                </div>
+                <div class="txt">
+                    <h3>小明</h3>
+                    <h4>分類 : 汪星人</h4>
+                    <input type="button" id="bntFiles" value="檔案 ">
+                </div>
+            </div>
+        </div>
+        <div class="aa">
+            <div class="card dog1">
+                <div class="pic">
+                    <img src="https://picsum.photos/300/200/?random=10">
+                </div>
+                <div class="txt">
+                    <h3>小明</h3>
+                    <h4>分類 : 汪星人</h4>
+                    <input type="button" id="bntFiles" value="檔案 ">
+                </div>
+            </div>
+            <div class="card dog1">
+                <div class="pic">
+                    <img src="https://picsum.photos/300/200/?random=11">
+                </div>
+                <div class="txt">
+                    <h3>小明</h3>
+                    <h4>分類 : 汪星人</h4>
+                    <input type="button" id="bntFiles" value="檔案 ">
+                </div>
+            </div>
+            <div class="card dog1">
+                <div class="pic">
+                    <img src="https://picsum.photos/300/200/?random=12">
+                </div>
+                <div class="txt">
+                    <h3>小明</h3>
+                    <h4>分類 : 汪星人</h4>
+                    <input type="button" id="bntFiles" value="檔案 ">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footertext">
+            <p>連絡電話: 09123456789 聯絡信箱:aaaaaaaaaa@gmail.地址:oo路xx號</p>
+        </div>
+    </footer>
+
+
+    <script type="text/javascript">
+        // console.log(document.getElementsByClassName("testPanel")[0].innerText);
+        // console.log(document.getElementsByClassName("testPanel")[0].textContent);
+        let objs = document.getElementsByName("searchData");
+        objs[0].placeholder = "搜尋.....";
+        objs[0].style.borderRadius = "40px";
+
+        function showInfo() {
+            window.alert(document.getElementById("adoptionSteps").innerText);
+        }
+        let btn = document.getElementById("btnProcess");
+        btn.onclick = showInfo;
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>

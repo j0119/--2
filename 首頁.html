@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="header.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .frontpage {
+            background-color: #E8D1BF;
+        }
+
+        h2,
+        p {
+            text-align: center;
+            margin: 70px 180px;
+        }
+
+
+        .banner {
+            width: 100%;
+
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            /* 圖片等比例縮放不變形 */
+
+        }
+
+        h1 {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            margin: 0;
+
+        }
+
+        .text1 {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            width: 45%;
+            min-width: 300px;
+            margin: 0;
+            font-size: 24px;
+            font-weight: normal;
+
+            .card1 {
+                display: flex;
+                align-items: center;
+                background-color: #C9975B;
+                margin: auto;
+            }
+
+            .content1 {
+                flex: 1;
+                padding: 40px;
+            }
+
+            .content1title {
+                font-size: 24px;
+                font-weight: 700;
+                color: #FFFEFE;
+            }
+
+            .content1text {
+                font-size: 16px;
+                font-weight: 400;
+                color: #FFFEFE;
+            }
+
+            .card1img {
+                flex: 1;
+                height: 100%;
+            }
+
+        }
+
+        .stepbox {
+            width: 1440px;
+            height: 870px;
+        }
+
+        .stepbox img {
+            width: 720px;
+            height: 870px;
+        }
+
+
+        .news {
+            display: block;
+            margin: 100px;
+            padding: 40px;
+            text-decoration: none;
+        }
+
+        li {
+            border-bottom: 1px solid #000;
+            padding: 10px 0;
+        }
+
+        li:first-child {
+            border-top: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div div class="frontpage">
+        <header>
+            <a class="logo" href="#"><img src="./圖庫/圖庫/pexels-mikhail-nilov-7474467.jpg" alt="logo"></a>
+
+            <nav>
+                <a href="#">登入</a>
+                <a href="#">測驗</a>
+                <a href="#">帶我回家</a>
+                <a href="#">交流平台</a>
+                <a href="#">寵物百科</a>
+            </nav>
+        </header>
+        <div class="banner">
+            <img src="./圖庫/動物圖/pexels-cup-of-couple-8473723.jpg" alt="">
+
+
+            <h1>每段陪伴，都值得被認真開始</h1>
+
+            <div class="text1">
+
+                <p>這裡不只是個網站，而是一個人與毛孩相遇的溫暖起點。 我們相信，養寵物不是一場單向的收容，而是兩顆心決定相伴前行的「人生合夥」。
+                    你的合夥人不會說話，但牠會用一輩子的忠誠與愛，參與你的喜怒哀樂。<br>
+                    無論你是渴望陪伴的新手、想尋找第二隻毛孩的老手， 還是正等待被看見的浪浪與動物們， 「寵物合夥人」將陪著你們，寫下最完美的相遇故事。</p>
+            </div>
+        </div>
+        <div class="card1">
+            <div class="content1">
+                <h3 class="content1title">飼主　X　機構　X　專家</h3>
+
+
+                <p class="content1text">
+                    在這裡，飼主可以自由分享飼養日常、交流經驗，並在溫暖的社群中獲得情感支持與新手建議；機構能輕鬆上架待認養毛孩的健康與個性資訊，公開認養流程並持續追蹤後續狀況；同時，專家也將進駐解答各類照護與行為問題、分享專業文章，並協助設計趣味測驗。無論你是想尋找新家人、解決飼養疑難雜症，還是想分享毛孩的可愛瞬間，這裡都是你最強大的後盾！
+                </p>
+            </div>
+
+            <div class="card1img"><img src="./圖庫/網頁圖/Component 17.png" alt=""></div>
+        </div>
+        <div class="content2">
+            <img src="./圖庫/網頁圖/Component 1.jpg">
+            <h2>誰才是你的最佳合夥人呢?</h2>
+        </div>
+
+
+        <div class="step">
+            <div class="stepbox">
+                <img src="./圖庫/圖庫/pexels-mikhail-nilov-9159043.jpg" alt="">
+                <h2>1. 配對測驗</h2>
+                <span>透過趣味且專業的性格與生活型態問卷，深入分析您的居住環境、時間分配與個性特質，精準推薦最適合與您共度未來的理想寵物物種與個性類型。</span>
+            </div>
+            <div class="stepbox"><img src="./圖庫/圖庫/pexels-cottonbro-5895028.jpg" alt="">
+                <h2>2. 寵物百科</h2>
+                <span>針對測驗推薦的寵物結果，提供完整的品種知識、照護須知與基本開銷評估，讓您在動心之餘，更能全方位建立正確的飼養認知。</span>
+            </div>
+            <div class="stepbox"><img src="./圖庫/圖庫/pexels-fr3nks-343241.jpg" alt="">
+                <h2>3. 虛擬寵物</h2>
+                <span>認養前的超擬真體驗！透過線上定期餵食、互動與突發狀況模擬，讓您在無負擔的環境下，親身感受真實飼養的生活節奏，藉此評估自己是否已做好照顧新生命的準備。</span>
+            </div>
+            <div class="stepbox"><img src="./圖庫/圖庫/pexels-mikhail-nilov-7474467.jpg" alt="">
+                <h2>4. 帶我回家</h2>
+                <span>幸福媒合的最後一哩路！串聯各大合法機構與流浪動物之家，將虛擬體驗轉化為真實行動，讓您直接瀏覽待認養毛孩的真實資訊與健康狀況，順利找到彼此相伴的終生夥伴。</span>
+            </div>
+        </div>
+
+
+        <div class="news">
+            <h2>最新消息</h2>
+            <ul>
+                <li><a href="">政府寵物政策</a></li>
+                <li><a href="">動保法更新</a></li>
+                <li> <a href="">結紮補助</a></li>
+                <li><a href="">寵物展資訊</a></li>
+                <li><a href="">認養活動</a></li>
+                <li><a href="">疫苗公告</a></li>
+            </ul>
+        </div>
+
+
+
+
+
+
+
+    </div>
+    <footer>
+        <div class="footertext">
+            <p>連絡電話: 09123456789 聯絡信箱:aaaaaaaaaa@gmail.地址:oo路xx號</p>
+        </div>
+
+    </footer>
+</body>
+
+</html>
