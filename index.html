@@ -56,47 +56,76 @@
             margin: 0;
             font-size: 24px;
             font-weight: normal;
+        }
 
-            .card1 {
-                display: flex;
-                align-items: center;
-                background-color: #C9975B;
-                margin: auto;
-            }
+        .card1 {
+            display: flex;
+            align-items: center;
+            background-color: #C9975B;
+            margin: auto;
+        }
 
-            .content1 {
-                flex: 1;
-                padding: 40px;
-            }
+        .content1 {
+            flex: 1;
+            padding: 40px;
+        }
 
-            .content1title {
-                font-size: 24px;
-                font-weight: 700;
-                color: #FFFEFE;
-            }
+        .content1title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #FFFEFE;
+        }
 
-            .content1text {
-                font-size: 16px;
-                font-weight: 400;
-                color: #FFFEFE;
-            }
+        .content1text {
+            font-size: 16px;
+            font-weight: 400;
+            color: #FFFEFE;
+        }
 
-            .card1img {
-                flex: 1;
-                height: 100%;
-            }
+        .card1img {
+            flex: 1;
+            height: 100%;
+        }
 
+        .content2 {
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+            text-align: center;
+        }
+
+        .content2 img {
+            width: 100%;
+            height: auto;
+        }
+
+        .content2 h2 {
+            position: absolute;
+            bottom: 40px;
+            left: 50px;
+            color: #FFFEFE
+        }
+
+
+        .step {
+            display: flex;
+            flex-direction: column;
         }
 
         .stepbox {
-            width: 1440px;
-            height: 870px;
+            display: flex;
+            align-items: center;
         }
 
         .stepbox img {
-            width: 720px;
-            height: 870px;
+            width: 500px;
+            height: 600px;
         }
+
+        .steptext {
+            padding: 100px;
+        }
+
 
 
         .news {
@@ -166,20 +195,29 @@
         <div class="step">
             <div class="stepbox">
                 <img src="./picture/people/pexels-mikhail-nilov-9159043.jpg" alt="">
-                <h2>1. 配對測驗</h2>
-                <span>透過趣味且專業的性格與生活型態問卷，深入分析您的居住環境、時間分配與個性特質，精準推薦最適合與您共度未來的理想寵物物種與個性類型。</span>
+
+                <div class="steptext">
+                    <h2>1. 配對測驗</h2>
+                    <span>透過趣味且專業的性格與生活型態問卷，深入分析您的居住環境、時間分配與個性特質，精準推薦最適合與您共度未來的理想寵物物種與個性類型。</span>
+                </div>
             </div>
             <div class="stepbox"><img src="./picture/people/pexels-cottonbro-5895028.jpg" alt="">
-                <h2>2. 寵物百科</h2>
-                <span>針對測驗推薦的寵物結果，提供完整的品種知識、照護須知與基本開銷評估，讓您在動心之餘，更能全方位建立正確的飼養認知。</span>
+                <div class="steptext">
+                    <h2>2. 寵物百科</h2>
+                    <span>針對測驗推薦的寵物結果，提供完整的品種知識、照護須知與基本開銷評估，讓您在動心之餘，更能全方位建立正確的飼養認知。</span>
+                </div>
             </div>
             <div class="stepbox"><img src="./picture/people/pexels-fr3nks-343241.jpg" alt="">
-                <h2>3. 虛擬寵物</h2>
-                <span>認養前的超擬真體驗！透過線上定期餵食、互動與突發狀況模擬，讓您在無負擔的環境下，親身感受真實飼養的生活節奏，藉此評估自己是否已做好照顧新生命的準備。</span>
+                <div class="steptext">
+                    <h2>3. 虛擬寵物</h2>
+                    <span>認養前的超擬真體驗！透過線上定期餵食、互動與突發狀況模擬，讓您在無負擔的環境下，親身感受真實飼養的生活節奏，藉此評估自己是否已做好照顧新生命的準備。</span>
+                </div>
             </div>
             <div class="stepbox"><img src="./picture/people/pexels-mikhail-nilov-7474467.jpg" alt="">
-                <h2>4. 帶我回家</h2>
-                <span>幸福媒合的最後一哩路！串聯各大合法機構與流浪動物之家，將虛擬體驗轉化為真實行動，讓您直接瀏覽待認養毛孩的真實資訊與健康狀況，順利找到彼此相伴的終生夥伴。</span>
+                <div class="steptext">
+                    <h2>4. 帶我回家</h2>
+                    <span>幸福媒合的最後一哩路！串聯各大合法機構與流浪動物之家，將虛擬體驗轉化為真實行動，讓您直接瀏覽待認養毛孩的真實資訊與健康狀況，順利找到彼此相伴的終生夥伴。</span>
+                </div>
             </div>
         </div>
 
@@ -206,9 +244,10 @@
     <footer>
         <div class="footertext">
             <p>連絡電話: 09123456789 聯絡信箱:aaaaaaaaaa@gmail.地址:oo路xx號</p>
-        </div>
+
 
     </footer>
+    </div>
 </body>
 
 </html>
