@@ -10,19 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./header.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         div {
             display: block;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background-color: #f5f5f5;
+            background-color: var(--white);
         }
 
         .main-container {
@@ -53,13 +47,13 @@
             border-radius: 50%;
             margin: 0 auto 12px;
             object-fit: cover;
-            border: 3px solid #c9975b;
+            border: 3px solid var(--standout);
         }
 
         .sidebar-username {
             font-size: 16px;
             font-weight: 600;
-            color: #333;
+            color: var(--text);
         }
 
         .sidebar-section {
@@ -69,7 +63,7 @@
         .sidebar-section-title {
             font-size: 14px;
             font-weight: 600;
-            color: #333;
+            color: var(--text);
             margin-bottom: 12px;
             padding-left: 8px;
         }
@@ -80,14 +74,14 @@
             gap: 10px;
             padding: 10px 12px;
             text-decoration: none;
-            color: #333;
+            color: var(--text);
             border-radius: 6px;
             transition: background-color 0.3s;
             font-size: 14px;
         }
 
         .sidebar a:hover {
-            background-color: #e8dcc8;
+            background-color: var(--grayscale);
         }
 
         .sidebar a span {
@@ -102,7 +96,7 @@
         .sidebar-article-item {
             padding: 10px 12px;
             font-size: 13px;
-            color: #555;
+            color: var(--dark);
             border-radius: 6px;
             line-height: 1.4;
             cursor: pointer;
@@ -115,7 +109,7 @@
 
         .sidebar-article-number {
             font-weight: 600;
-            color: #c9975b;
+            color: var(--standout);
             margin-right: 6px;
         }
 
@@ -129,8 +123,8 @@
             margin-bottom: 20px;
         }
 
-        .post-button {
-            background-color: #c9975b;
+        /* .post-button {
+            background-color: var(--standout);
             color: black;
             border: none;
             padding: 10px 30px;
@@ -143,22 +137,22 @@
         }
 
         .post-button:hover {
-            background-color: #b8845a;
+            background-color: var(--standout);
             transform: scale(1.02);
-        }
+        }*/
 
         .post-button:active {
             transform: scale(0.98);
         }
 
-        .posts-container {
+        */ .posts-container {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
 
         .post-card {
-            background-color: white;
+            background-color: var(--white);
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -191,7 +185,7 @@
             background-color: #ddd;
             flex-shrink: 0;
             object-fit: cover;
-            border: 2px solid #f5f5f5;
+            border: 2px solid var(--white);
         }
 
         .post-author-section {
@@ -209,12 +203,12 @@
         .post-author {
             font-weight: 600;
             font-size: 14px;
-            color: #333;
+            color: var(--text);
         }
 
         .post-badge {
             background-color: #c9975b;
-            color: white;
+            color: var(--white);
             font-size: 11px;
             padding: 3px 8px;
             border-radius: 12px;
@@ -229,12 +223,12 @@
 
         .post-time {
             font-size: 12px;
-            color: #999;
+            color: var(--grayscale);
         }
 
         .post-badge-button {
-            background-color: #f0e8de;
-            color: #333;
+            background-color: var(--white);
+            color: var(--text);
             border: none;
             padding: 6px 12px;
             border-radius: 6px;
@@ -245,14 +239,14 @@
         }
 
         .post-badge-button:hover {
-            background-color: #e8dcc8;
+            background-color: var(--light);
         }
 
         .post-content {
             margin-bottom: 15px;
             font-size: 14px;
             line-height: 1.6;
-            color: #555;
+            color: var(--text);
         }
 
         .post-image {
@@ -267,7 +261,7 @@
             display: flex;
             gap: 20px;
             padding-top: 12px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid var(--grayscale);
             align-items: center;
         }
 
@@ -277,12 +271,12 @@
             gap: 6px;
             cursor: pointer;
             font-size: 12px;
-            color: #666;
+            color: var(--grayscale);
             transition: color 0.3s;
         }
 
         .post-action:hover {
-            color: #c9975b;
+            color: var(--standout);
         }
 
         .post-action img {
@@ -292,13 +286,14 @@
 
         .post-action b {
             font-weight: 500;
+            color: var(--text);
         }
 
-        /* 评论区 */
+        /* 評論區 */
         .post-comments {
             margin-top: 15px;
             padding-top: 15px;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--white);
         }
 
         .comment-item {
@@ -311,7 +306,7 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background-color: #ddd;
+            background-color: var(--white);
             flex-shrink: 0;
             object-fit: cover;
         }
@@ -330,19 +325,19 @@
         .comment-author {
             font-weight: 600;
             font-size: 12px;
-            color: #333;
+            color: var(--text);
         }
 
         .comment-time {
             font-size: 11px;
-            color: #999;
+            color: var(--grayscale);
         }
 
         .comment-text {
             font-size: 13px;
-            color: #555;
+            color: var(--grayscale);
             line-height: 1.5;
-            background-color: #f9f9f9;
+            background-color: var(--white);
             padding: 8px 10px;
             border-radius: 6px;
             margin-bottom: 6px;
@@ -352,7 +347,7 @@
             display: flex;
             gap: 12px;
             font-size: 12px;
-            color: #999;
+            color: var(--grayscale);
         }
 
         .comment-action {
@@ -361,7 +356,7 @@
         }
 
         .comment-action:hover {
-            color: #c9975b;
+            color: var(--standout);
         }
 
         /* 模態框 */
@@ -388,7 +383,7 @@
         }
 
         .modal-content {
-            background-color: white;
+            background-color: var(--white);
             margin: 10% auto;
             padding: 30px;
             border-radius: 12px;
@@ -414,7 +409,7 @@
             font-size: 20px;
             font-weight: 600;
             margin-bottom: 20px;
-            color: #333;
+            color: var(--text);
         }
 
         .modal-body {
@@ -432,13 +427,13 @@
         .form-group label {
             font-size: 14px;
             font-weight: 500;
-            color: #333;
+            color: var(--text);
         }
 
         .form-group input,
         .form-group textarea {
             padding: 10px 12px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--white);
             border-radius: 6px;
             font-family: inherit;
             font-size: 14px;
@@ -448,7 +443,7 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #c9975b;
+            border-color: var(--standout);
         }
 
         .form-group textarea {
@@ -475,34 +470,44 @@
         }
 
         .btn-submit {
-            background-color: #c9975b;
+            background-color: var(--standout);
             color: black;
         }
 
         .btn-submit:hover {
-            background-color: #b8845a;
+            background-color: var(--standout);
         }
 
         .btn-cancel {
-            background-color: #e8e8e8;
-            color: #333;
+            background-color: var(--white);
+            color: var(--text);
         }
 
         .btn-cancel:hover {
-            background-color: #d8d8d8;
+            background-color: var(--light);
         }
 
         .close-btn {
             float: right;
             font-size: 24px;
             font-weight: bold;
-            color: #999;
+            color: var(--grayscale);
             cursor: pointer;
             transition: color 0.3s;
         }
 
         .close-btn:hover {
-            color: #333;
+            color: var(--text);
+        }
+
+        @media screen and (width < 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                flex: 0 0 auto;
+            }
         }
     </style>
 </head>
@@ -534,8 +539,7 @@
         <div class="sidebar">
             <!-- 用戶資訊 -->
             <div class="sidebar-user">
-                <img src="./picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張亞洲愛狗人士真人聊天室頭像 515506.png" alt="頭像"
-                    class="sidebar-avatar">
+                <img src="./picture/6 comminicate/01.png" alt="頭像" class="sidebar-avatar">
                 <div class="sidebar-username">王帆明</div>
             </div>
 
@@ -604,7 +608,7 @@
 
         <div class="content-area">
             <div class="post-button-container">
-                <button class="post-button" onclick="openPostModal()">發表貼文</button>
+                <button class="btn btn-c" onclick="openPostModal()">發表貼文</button>
             </div>
 
             <div class="posts-container" id="postsContainer">
@@ -633,8 +637,8 @@
                 </div>
             </div>
             <div class="modal-actions">
-                <button class="btn-submit" onclick="submitPost()">發表</button>
-                <button class="btn-cancel" onclick="closePostModal()">取消</button>
+                <button class="btn btn-c" onclick="submitPost()">發表</button>
+                <button class="btn btn-b" onclick="closePostModal()">取消</button>
             </div>
         </div>
     </div>
@@ -686,9 +690,9 @@
                 category: '生活趣事',
                 content: '家裡的貓子養三年了，一直都是乖乖吃砂盆的天使，但這有天牠突然開始在沙發上廁所原，我沒有貓咪的品味，生活環境也沒變，真的很困擾，求救！',
                 time: '15小時前',
-                avatar: './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張亞洲愛貓人士真人聊天室頭像 515506.png',
-                badge: '認證貓奴',
-                badgeButton: '認證貓奴',
+                avatar: './picture/6 comminicate/08.png',
+                // badge: '認證貓奴',
+                // badgeButton: '認證貓奴',
                 likes: 124,
                 comments: 23,
                 shares: 12,
@@ -700,7 +704,7 @@
                 category: '新手村',
                 content: '請問各位大大，剛買的寵物應該怎麼照顧？求解答～',
                 time: '4小時前',
-                avatar: './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張亞洲男性真人聊天室頭像 515506.png',
+                avatar: './picture/6 comminicate/03.png',
                 likes: 87,
                 comments: 56,
                 shares: 23,
@@ -712,7 +716,7 @@
                 category: '疑難雜症',
                 content: '寵物最近沒有胃口？可能有幾個原因需要檢查...',
                 time: '6小時前',
-                avatar: './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張台灣小黑狗與中年男性亞洲愛狗人士真人聊天室頭像 509535.png',
+                avatar: './picture/1 index/professionals/1.png',
                 likes: 234,
                 comments: 89,
                 shares: 45,
@@ -808,11 +812,13 @@
             }
 
             const avatars = [
-                './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張亞洲愛狗人士真人聊天室頭像 515506.png',
-                './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張亞洲愛貓人士真人聊天室頭像 515506.png',
-                './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張亞洲男性真人聊天室頭像 515506.png',
-                './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張亞洲真人聊天室頭像 515506.png',
-                './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張台灣小黑狗與中年男性亞洲愛狗人士真人聊天室頭像 509535.png'
+                './picture/6 comminicate/01.png',
+                './picture/6 comminicate/03.png',
+                './picture/6 comminicate/04.png',
+                './picture/6 comminicate/05.png',
+                './picture/6 comminicate/06.png',
+                './picture/6 comminicate/08.png',
+                './picture/6 comminicate/07.png'
             ];
 
             const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];

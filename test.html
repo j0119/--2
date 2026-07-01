@@ -65,6 +65,13 @@
             transition: background 0.3s;
         }
 
+        .steps-track .step-line {
+            flex: 1;
+            height: 2px;
+            background: var(--grayscale);
+            transition: background 0.3s;
+        }
+
         .step-line.active {
             background: var(--standout);
         }
@@ -190,6 +197,29 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 36px;
+
+        }
+
+        @media screen and (width < 768px) {
+            .quiz-wrap {
+                padding: 24px 16px 40px;
+            }
+
+            .step-circle {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .progress-pct {
+                font-size: 18px;
+                min-width: 48px;
+            }
+
+            .quiz-progress {
+                gap: 16px;
+                margin-bottom: 32px;
+            }
         }
     </style>
 </head>

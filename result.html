@@ -28,8 +28,8 @@
 
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text);
+            background-color: var(--light);
+            /* color: var(--text); */
         }
 
 
@@ -54,7 +54,7 @@
             height: 64px;
             border-radius: 50%;
             background: var(--accent);
-            color: #fff;
+            color: var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -66,13 +66,13 @@
         .step-line {
             flex: 1;
             height: 2px;
-            background: var(--accent);
+            background: var(--standout);
         }
 
         .progress-pct {
             font-size: 28px;
             font-weight: 700;
-            color: var(--accent);
+            color: var(--standout);
             min-width: 72px;
             text-align: right;
         }
@@ -92,7 +92,7 @@
         .result-label {
             display: block;
             font-size: 13px;
-            color: var(--text-muted);
+            color: var(--text);
             letter-spacing: 0.08em;
             margin-bottom: 8px;
         }
@@ -100,7 +100,7 @@
         .result-title {
             font-size: 40px;
             font-weight: 700;
-            color: var(--dark-brown);
+            color: var(--dark);
             margin: 0 0 28px;
         }
 
@@ -109,35 +109,16 @@
             gap: 12px;
         }
 
-        .btn-tab {
-            padding: 12px 36px;
-            border-radius: 24px;
-            font-size: 15px;
-            font-family: inherit;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.2s, border-color 0.2s, color 0.2s;
-            border: 1.5px solid var(--btn-light);
-            background: transparent;
-            color: var(--text-muted);
-        }
-
-        .btn-tab:hover {
-            border-color: var(--btn-secondary);
-            color: var(--text);
-        }
-
-        .btn-tab.active {
-            background: var(--dark-brown);
-            border-color: var(--dark-brown);
-            color: #fff;
+        .result-tabs .btn.active {
+            background: var(--dark);
+            color: var(--white);
         }
 
         /* ── Two-column Layout ── */
         .result-content {
             display: flex;
             gap: 64px;
-            align-items: flex-start;
+            align-items: stretch;
         }
 
         /* ── Left: Radar Chart ── */
@@ -147,12 +128,17 @@
             flex-direction: column;
             align-items: center;
             gap: 20px;
+            justify-content: space-between;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
         }
 
         .chart-wrap {
-            width: 460px;
-            height: 460px;
-            background: #fff;
+            flex: 1;
+            width: 100%;
+            height: auto;
+            background: transparent;
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -167,7 +153,7 @@
 
         .chart-placeholder-text {
             font-size: 14px;
-            color: var(--btn-light);
+            color: var(--light);
             text-align: center;
             line-height: 1.8;
             pointer-events: none;
@@ -182,13 +168,13 @@
 
         .chart-note {
             font-size: 13px;
-            color: var(--text-muted);
+            color: var(--text);
             text-align: center;
             line-height: 1.8;
         }
 
         .chart-note strong {
-            color: var(--accent);
+            color: var(--standout);
         }
 
         /* ── Right: Score Bars ── */
@@ -198,9 +184,11 @@
             flex-direction: column;
             gap: 28px;
             padding-top: 8px;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
         }
 
-        .score-item {}
 
         .score-head {
             display: flex;
@@ -212,18 +200,18 @@
         .score-name {
             font-size: 18px;
             font-weight: 700;
-            color: var(--dark-brown);
+            color: var(--dark);
         }
 
         .score-val {
             font-size: 18px;
             font-weight: 700;
-            color: var(--dark-brown);
+            color: var(--dark);
         }
 
         .score-track {
             height: 8px;
-            background: var(--btn-light);
+            background: var(--light);
             border-radius: 4px;
             overflow: hidden;
             margin-bottom: 10px;
@@ -231,7 +219,7 @@
 
         .score-fill {
             height: 100%;
-            background: var(--accent);
+            background: var(--standout);
             border-radius: 4px;
             width: 0%;
             transition: width 0.8s ease;
@@ -239,9 +227,33 @@
 
         .score-desc {
             font-size: 13px;
-            color: var(--text-muted);
+            color: var(--text);
             line-height: 1.8;
             margin: 0;
+        }
+
+        @media screen and (width < 768px) {
+            .result-progress {
+                padding: 24px 16px 0;
+            }
+
+            .result-wrap {
+                padding: 24px 16px 40px;
+            }
+
+            .result-content {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .result-chart-col {
+                flex: 0 0 auto;
+                width: 100%;
+            }
+
+            .chart-wrap {
+                min-height: 300px;
+            }
         }
     </style>
 </head>
@@ -292,8 +304,8 @@
                 <span class="result-label">五面向分析</span>
                 <h1 class="result-title">你的配對分析</h1>
                 <div class="result-tabs">
-                    <button class="btn-tab active" id="tab-user">我的評分</button>
-                    <button class="btn-tab" id="tab-breed">品種特性</button>
+                    <button class="btn btn-b active" id="tab-user">我的評分</button>
+                    <button class="btn btn-b" id="tab-breed">品種特性</button>
                 </div>
             </div>
 
@@ -418,50 +430,90 @@
         </div>
     </footer>
 
-    <div>
-        <canvas id="myChart"></canvas>
-    </div>
     <script src="./chart.umd.min.js"></script>
-
     <script>
-        const ctx = document.getElementById('myChart');
+        document.addEventListener('DOMContentLoaded', function () {
+            const scores = JSON.parse(localStorage.getItem('petQuizScores')) || {
+                環境: 0, 經濟: 0, 時間: 0, 包容力: 0, 穩定度: 0
+            };
 
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+            const descriptions = {
+                環境: [
+                    { max: 3, text: '居住環境對飼養寵物有一定限制，建議優先考慮不需要大空間的小型或籠飼寵物。' },
+                    { max: 6, text: '居住空間尚可，適合中小型且活動量不高的寵物，如貓咪或小型犬。' },
+                    { max: 9, text: '居住空間與環境條件良好，非常適合飼養各類寵物，包含需要活動空間的中大型犬。' },
+                ],
+                經濟: [
+                    { max: 3, text: '目前預算較為有限，建議選擇日常開銷較低的寵物，並提前規劃緊急醫療基金。' },
+                    { max: 6, text: '每月預算充足，能負擔基本醫療與日常開銷，可考慮中等花費的寵物品種。' },
+                    { max: 9, text: '經濟條件優渥，能提供寵物良好的醫療照護與生活品質，適合各類寵物。' },
+                ],
+                時間: [
+                    { max: 3, text: '日常時間較為緊張，建議選擇獨立性強、不需要頻繁互動的寵物，如貓咪或魚類。' },
+                    { max: 6, text: '每日在家時間充裕，能提供足夠的陪伴，適合需要一定互動的寵物。' },
+                    { max: 9, text: '擁有充裕的時間陪伴寵物，非常適合需要大量互動與運動的活潑寵物。' },
+                ],
+                包容力: [
+                    { max: 3, text: '對寵物帶來的生活影響接受度較低，建議選擇安靜、掉毛少的寵物品種。' },
+                    { max: 6, text: '對掉毛與聲音有一定接受度，適合大多數常見的貓狗品種。' },
+                    { max: 9, text: '對掉毛與聲音接受度高，包容力強，幾乎能適應任何寵物帶來的生活改變。' },
+                ],
+                穩定度: [
+                    { max: 3, text: '目前飼養承諾度有待加強，建議再評估自身狀況後再做決定。' },
+                    { max: 6, text: '有一定的飼養心理準備，建議先了解目標寵物的長期需求再做決定。' },
+                    { max: 9, text: '飼養心理準備充分，穩定度佳，能給予寵物長期且穩定的照顧與陪伴。' },
+                ],
+            };
+
+            const dims = ['環境', '經濟', '時間', '包容力', '穩定度'];
+
+            dims.forEach(dim => {
+                const score = scores[dim] ?? 0;
+                document.getElementById('score-val-' + dim).textContent = score + '/9';
+                document.getElementById('score-bar-' + dim).style.width = (score / 9 * 100) + '%';
+                const desc = descriptions[dim].find(d => score <= d.max);
+                if (desc) document.getElementById('score-desc-' + dim).textContent = desc.text;
+            });
+
+            document.getElementById('chart-placeholder').style.display = 'none';
+
+            const ctx = document.getElementById('radar-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: dims,
+                    datasets: [{
+                        label: '你的評分',
+                        data: dims.map(d => scores[d] ?? 0),
+                        backgroundColor: 'rgba(201, 151, 91, 0.2)',
+                        borderColor: 'rgba(201, 151, 91, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(201, 151, 91, 1)',
+                        pointRadius: 5,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            min: 0,
+                            max: 9,
+                            ticks: { stepSize: 3, display: false },
+                            grid: { color: 'rgba(215, 205, 193, 0.6)' },
+                            angleLines: { color: 'rgba(215, 205, 193, 0.6)' },
+                            pointLabels: {
+                                font: { size: 14, family: "'Noto Sans TC', sans-serif", weight: '700' },
+                                color: '#2a2018',
+                            },
+                        }
+                    },
+                    plugins: { legend: { display: false } },
                 }
-            }
+            });
         });
     </script>
 
-
-
-    <!--
-        ── 之後加入的 JS 區塊 ──
-        1. 引入 Chart.js：
-           <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-        2. 引入評分邏輯：
-           <script src="./quiz.js"></script>
-
-        quiz.js 的工作：
-        - 從 localStorage.getItem('petQuizScores') 讀取分數
-        - 更新 #score-val-XX、#score-bar-XX、#score-desc-XX
-        - 用 Chart.js 在 #radar-chart 渲染雷達圖
-        - 隱藏 #chart-placeholder
-    -->
 
 </body>
 
