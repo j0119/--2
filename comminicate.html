@@ -6,69 +6,841 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>寵物合夥人｜交流平台</title>
 
-    <link rel="icon" href="./logo.png" type="image/png">
-    <link rel="stylesheet" href="header.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./header.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         div {
             display: block;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .main-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .sidebar {
+            flex: 0 0 280px;
+            background-color: #f9f3ed;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .sidebar-user {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e8e8e8;
+        }
+
+        .sidebar-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            object-fit: cover;
+            border: 3px solid #c9975b;
+        }
+
+        .sidebar-username {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+
+        .sidebar-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            padding-left: 8px;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            text-decoration: none;
+            color: #333;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+
+        .sidebar a:hover {
+            background-color: #e8dcc8;
+        }
+
+        .sidebar a span {
+            font-weight: 500;
+        }
+
+        .sidebar a img {
+            width: 16px;
+            height: 16px;
+        }
+
+        .sidebar-article-item {
+            padding: 10px 12px;
+            font-size: 13px;
+            color: #555;
+            border-radius: 6px;
+            line-height: 1.4;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar-article-item:hover {
+            background-color: #e8dcc8;
+        }
+
+        .sidebar-article-number {
+            font-weight: 600;
+            color: #c9975b;
+            margin-right: 6px;
+        }
+
+        .content-area {
+            flex: 1;
+        }
+
+        .post-button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .post-button {
+            background-color: #c9975b;
+            color: black;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .post-button:hover {
+            background-color: #b8845a;
+            transform: scale(1.02);
+        }
+
+        .post-button:active {
+            transform: scale(0.98);
+        }
+
+        .posts-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .post-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .post-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .post-header-left {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ddd;
+            flex-shrink: 0;
+            object-fit: cover;
+            border: 2px solid #f5f5f5;
+        }
+
+        .post-author-section {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .post-author-with-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .post-author {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .post-badge {
+            background-color: #c9975b;
+            color: white;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .post-time {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .post-badge-button {
+            background-color: #f0e8de;
+            color: #333;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .post-badge-button:hover {
+            background-color: #e8dcc8;
+        }
+
+        .post-content {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .post-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 20px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+            align-items: center;
+        }
+
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .post-action:hover {
+            color: #c9975b;
+        }
+
+        .post-action img {
+            width: 16px;
+            height: 16px;
+        }
+
+        .post-action b {
+            font-weight: 500;
+        }
+
+        /* 评论区 */
+        .post-comments {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .comment-item {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .comment-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #ddd;
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+
+        .comment-content {
+            flex: 1;
+        }
+
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            font-size: 12px;
+            color: #333;
+        }
+
+        .comment-time {
+            font-size: 11px;
+            color: #999;
+        }
+
+        .comment-text {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+            background-color: #f9f9f9;
+            padding: 8px 10px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+        }
+
+        .comment-actions {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .comment-action {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .comment-action:hover {
+            color: #c9975b;
+        }
+
+        /* 模態框 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #c9975b;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-submit,
+        .btn-cancel {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit {
+            background-color: #c9975b;
+            color: black;
+        }
+
+        .btn-submit:hover {
+            background-color: #b8845a;
+        }
+
+        .btn-cancel {
+            background-color: #e8e8e8;
+            color: #333;
+        }
+
+        .btn-cancel:hover {
+            background-color: #d8d8d8;
+        }
+
+        .close-btn {
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #333;
         }
     </style>
 </head>
 
 <body>
-    <header>
+    <input type="checkbox" id="nav-control">
+    <div class="main-header">
+        <div><a class="logo" href="./index.html"><img src="./logo.png" alt="logo"></a></div>
+        <nav class="nav">
 
-        <a class="logo" href="./index.html"><img src="./logo.png" alt="logo"></a>
+            <ul class="nav-links">
 
-        <nav>
-
-            <a href="./test.html">配對測驗</a>
-            <a href="./take me home.html">帶我回家</a>
-            <a href="./comminicate.html">交流平台</a>
-            <a href="#">寵物百科</a>
-            <a href="#">登入</a>
+                <li><a class="btn-test" id="btn-test_explain" href="./test-explain.html">配對測驗</a></li>
+                <li><a class="btn-encyclopedia" id="btn-encyclopedia" href="./encyclopedia.html">寵物百科</a></li>
+                <li><a class="btn-index" id="btn-index" href="#">虛擬寵物</a></li>
+                <li><a class="btn-takeMeHome" id="btn-takeMeHome" href="#">帶我回家</a></li>
+                <li><a class="btn-comminicate" id="btn-comminicate" href="./comminicate.html">交流平台</a></li>
+                <li><a class="btn-login" id="btn-login" href="./login.html">登入</a></li>
+            </ul>
         </nav>
+        <label for="nav-control" class="hb">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </label>
+    </div>
 
-    </header>
-    <ul>
-        <div>
-            <a href=""><span>我的貼文</span></a>
-            <a href=""><span>已儲存</span></a>
-        </div>
-        <div>
-            <a href=""><span>熱門貼文</span></a>
-            <a href=""><span>即時貼文</span></a>
-            <a href=""><span>新手村</span></a>
-            <a href=""><span>疑難雜症</span></a>
-            <a href=""><span>生活趣事</span></a>
-        </div>
-    </ul>
-
-
-    <ul>
-        <li>
-            <img src="" alt="">
-            <div>
-                <h3>name</h3>
-                <span>times</span>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro tempore iusto labore, ipsa natus nemo
-                    inventore incidunt exercitationem hic consequuntur laboriosam pariatur soluta quam aut placeat
-                    repudiandae amet, minima voluptate.</p>
-                <ol>
-                    <li><img src="" alt=""><b>123</b></li>
-                    <li><img src="" alt=""><b>123</b></li>
-                    <li><img src="" alt=""><b>123</b></li>
-                    <li><img src="" alt=""><b>123</b></li>
-                </ol>
+    <div class="main-container">
+        <div class="sidebar">
+            <!-- 用戶資訊 -->
+            <div class="sidebar-user">
+                <img src="./picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張亞洲愛狗人士真人聊天室頭像 515506.png" alt="頭像"
+                    class="sidebar-avatar">
+                <div class="sidebar-username">王帆明</div>
             </div>
-        </li>
-    </ul>
-    <footer>
 
-        <div class="footertext">
-            <p>連絡電話: 09123456789 聯絡信箱:aaaaaaaaaa@gmail.地址:oo路xx號</p>
+            <!-- 我的內容 -->
+            <div class="sidebar-section">
+                <a href="#" onclick="return false;">
+                    <img src="./icon/article.png" alt="文章">
+                    <span>我的文章</span>
+                </a>
+                <a href="#" onclick="return false;">
+                    <img src="./icon/bookmark.png" alt="收藏">
+                    <span>我的收藏</span>
+                </a>
+            </div>
+
+            <!-- 分類 -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">分類</div>
+                <a href="#">
+                    <img src="./icon/trending.png" alt="熱門">
+                    <span>熱門文章</span>
+                </a>
+                <a href="#">
+                    <img src="./icon/recent.png" alt="即時">
+                    <span>即時文章</span>
+                </a>
+                <a href="#">
+                    <img src="./icon/question.png" alt="疑問">
+                    <span>疑難雜症</span>
+                </a>
+                <a href="#">
+                    <img src="./icon/daily.png" alt="日常">
+                    <span>生活趣事</span>
+                </a>
+                <a href="#">
+                    <img src="./icon/beginner.png" alt="新手">
+                    <span>新手村</span>
+                </a>
+            </div>
+
+            <!-- 本週熱門 -->
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">本週熱門</div>
+                <div class="sidebar-article-item">
+                    <span class="sidebar-article-number">1</span>
+                    夏天這樣合作貓咪千萬不能吃
+                </div>
+                <div class="sidebar-article-item">
+                    <span class="sidebar-article-number">2</span>
+                    認養一隻月！小貓適應新家
+                </div>
+                <div class="sidebar-article-item">
+                    <span class="sidebar-article-number">3</span>
+                    黃金獵犬第一次看到海
+                </div>
+                <div class="sidebar-article-item">
+                    <span class="sidebar-article-number">4</span>
+                    貓咪線尾底下怎麼辦
+                </div>
+                <div class="sidebar-article-item">
+                    <span class="sidebar-article-number">5</span>
+                    推薦幾款超好用的貓砂比較
+                </div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="post-button-container">
+                <button class="post-button" onclick="openPostModal()">發表貼文</button>
+            </div>
+
+            <div class="posts-container" id="postsContainer">
+                <!-- 貼文卡片將動態插入這裡 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 發表貼文的模態框 -->
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closePostModal()">&times;</span>
+            <div class="modal-header">新增貼文</div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="postAuthor">名稱</label>
+                    <input type="text" id="postAuthor" placeholder="輸入你的名稱">
+                </div>
+                <div class="form-group">
+                    <label for="postCategory">分類</label>
+                    <input type="text" id="postCategory" placeholder="例如：新手村、生活趣事等">
+                </div>
+                <div class="form-group">
+                    <label for="postContent">貼文內容</label>
+                    <textarea id="postContent" placeholder="分享你的想法和經驗..."></textarea>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-submit" onclick="submitPost()">發表</button>
+                <button class="btn-cancel" onclick="closePostModal()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 col-md-4">
+                    <a class="nav_logo" href="./index.html"><img src="./logo.png" alt="logo"></a>
+                    <h3 class="footer-logo">寵物合夥人</h3>
+                    <p class="footer-tagline">每段陪伴，都值得被認真開始。</p>
+                </div>
+
+                <div class="col-4 col-md-4">
+                    <h4 class="footer-section-title">聯絡我們</h4>
+                    <span class="footer-text">
+                        <p>服務時間：09:00 - 18:00
+                        <p>聯絡信箱：qwwerrt@gmail.com
+                        <p>聯絡電話：0900000000
+                    </span>
+                </div>
+
+                <div class="col-4 col-md-4 footer-links">
+                    <h4 class="footer-section-title">快速連結</h4>
+                    <ul class="footer-links">
+                        <li><a class="btn-test" id="btn-test_explain" href="./test-explain.html">配對測驗</a></li>
+                        <li><a class="btn-encyclopedia" id="btn-encyclopedia" href="./encyclopedia.html">寵物百科</a></li>
+                        <li><a class="btn-index" id="btn-index" href="#">虛擬寵物</a></li>
+                        <li><a class="btn-takeMeHome" id="btn-takeMeHome" href="#">帶我回家</a></li>
+                        <li><a class="btn-comminicate" id="btn-comminicate" href="./comminicate.html">交流平台</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-12">
+                    <div class="footer-bottom">
+                        © 2026 寵物合夥人．All rights reserved.
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
-</body>
 
-</html>
+    <script>
+        // 初始化貼文數據
+        let posts = [
+            {
+                id: 1,
+                author: '資深貓奴 D',
+                category: '生活趣事',
+                content: '家裡的貓子養三年了，一直都是乖乖吃砂盆的天使，但這有天牠突然開始在沙發上廁所原，我沒有貓咪的品味，生活環境也沒變，真的很困擾，求救！',
+                time: '15小時前',
+                avatar: './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張亞洲愛貓人士真人聊天室頭像 515506.png',
+                badge: '認證貓奴',
+                badgeButton: '認證貓奴',
+                likes: 124,
+                comments: 23,
+                shares: 12,
+                views: 234
+            },
+            {
+                id: 2,
+                author: '新手養寵物',
+                category: '新手村',
+                content: '請問各位大大，剛買的寵物應該怎麼照顧？求解答～',
+                time: '4小時前',
+                avatar: './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張亞洲男性真人聊天室頭像 515506.png',
+                likes: 87,
+                comments: 56,
+                shares: 23,
+                views: 345
+            },
+            {
+                id: 3,
+                author: '寵物醫生',
+                category: '疑難雜症',
+                content: '寵物最近沒有胃口？可能有幾個原因需要檢查...',
+                time: '6小時前',
+                avatar: './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張台灣小黑狗與中年男性亞洲愛狗人士真人聊天室頭像 509535.png',
+                likes: 234,
+                comments: 89,
+                shares: 45,
+                views: 567
+            }
+        ];
+
+        let nextId = 4;
+
+        // 初始化頁面
+        document.addEventListener('DOMContentLoaded', function () {
+            renderPosts(posts);
+        });
+
+        // 渲染貼文列表
+        function renderPosts(postsToRender) {
+            const container = document.getElementById('postsContainer');
+            container.innerHTML = '';
+
+            postsToRender.forEach(post => {
+                const postCard = createPostCard(post);
+                container.appendChild(postCard);
+            });
+        }
+
+        // 創建貼文卡片元素
+        function createPostCard(post) {
+            const card = document.createElement('div');
+            card.className = 'post-card';
+            const avatarSrc = post.avatar || './icon/avatar.png';
+
+            card.innerHTML = `
+                <div class="post-header">
+                    <div class="post-header-left">
+                        <img src="${avatarSrc}" alt="頭像" class="post-avatar">
+                        <div class="post-author-section">
+                            <div class="post-author-with-badge">
+                                <div class="post-author">${post.author}</div>
+                                ${post.badge ? `<div class="post-badge">${post.badge}</div>` : ''}
+                            </div>
+                            <div class="post-meta">
+                                <div class="post-time">${post.time}</div>
+                            </div>
+                        </div>
+                    </div>
+                    ${post.badgeButton ? `<button class="post-badge-button">${post.badgeButton}</button>` : ''}
+                </div>
+                <div class="post-content">${post.content}</div>
+                <div class="post-actions">
+                    <div class="post-action">
+                        <img src="./icon/thumbsup.png" alt="讚">
+                        <b>${post.likes}</b>
+                    </div>
+                    <div class="post-action">
+                        <img src="./icon/comment.png" alt="留言">
+                        <b>${post.comments}</b>
+                    </div>
+                    <div class="post-action">
+                        <img src="./icon/share.png" alt="轉發">
+                        <b>${post.shares}</b>
+                    </div>
+                    <div class="post-action">
+                        <img src="./icon/eye-open.png" alt="檢視">
+                        <b>${post.views}</b>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // 打開發表貼文的模態框
+        function openPostModal() {
+            document.getElementById('postModal').style.display = 'block';
+        }
+
+        // 關閉模態框
+        function closePostModal() {
+            document.getElementById('postModal').style.display = 'none';
+            document.getElementById('postAuthor').value = '';
+            document.getElementById('postCategory').value = '';
+            document.getElementById('postContent').value = '';
+        }
+
+        // 提交新貼文
+        function submitPost() {
+            const author = document.getElementById('postAuthor').value.trim();
+            const category = document.getElementById('postCategory').value.trim();
+            const content = document.getElementById('postContent').value.trim();
+
+            if (!author || !category || !content) {
+                alert('請填入所有欄位！');
+                return;
+            }
+
+            const avatars = [
+                './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張亞洲愛狗人士真人聊天室頭像 515506.png',
+                './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張亞洲愛貓人士真人聊天室頭像 515506.png',
+                './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張亞洲男性真人聊天室頭像 515506.png',
+                './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張亞洲真人聊天室頭像 515506.png',
+                './picture/6 comminicate/Firefly_Gemini Flash_請幫我生成一張台灣小黑狗與中年男性亞洲愛狗人士真人聊天室頭像 509535.png'
+            ];
+
+            const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
+
+            const newPost = {
+                id: nextId++,
+                author: author,
+                category: category,
+                content: content,
+                time: '剛剛',
+                avatar: randomAvatar,
+                likes: 0,
+                comments: 0,
+                shares: 0,
+                views: 0
+            };
+
+            posts.unshift(newPost);
+            renderPosts(posts);
+            closePostModal();
+            alert('貼文已發表！');
+        }
+
+        // 點擊模態框外部關閉
+        window.onclick = function (event) {
+            const modal = document.getElementById('postModal');
+            if (event.target === modal) {
+                closePostModal();
+            }
+        }
+    </script>

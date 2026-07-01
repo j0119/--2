@@ -1,166 +1,555 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>寵物合夥人｜配對測驗</title>
-
-    <link rel="icon" href="./logo.png" type="image/png">
-    <link rel="stylesheet" href="header.css">
+    <title>配對測驗 — 寵物合夥人</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./header.css">
     <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--light);
 
+        }
+
+
+
+        /* ── Quiz Wrap ── */
+        .quiz-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 100px 80px;
+        }
+
+        /* ── Progress Bar ── */
+        .quiz-progress {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            margin-bottom: 56px;
+        }
+
+        .steps-track {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #e8d1bf;
+            color: #bdab9b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: 700;
+            flex-shrink: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .step-circle.active {
+            background: var(--standout);
+            color: var(--white);
+        }
+
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: #e8d1bf;
+            transition: background 0.3s;
+        }
+
+        .step-line.active {
+            background: var(--standout);
+        }
+
+        .progress-pct {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--standout);
+            min-width: 72px;
+            text-align: right;
+        }
+
+        /* ── Section Toggle ── */
+        .quiz-section {
+            display: none;
+        }
+
+        .quiz-section.active {
+            display: block;
+        }
+
+        /* ── Section Header ── */
+        .section-header {
+            margin-bottom: 28px;
+        }
+
+        .section-chip {
+            display: inline-block;
+            background: var(--grayscale);
+            color: var(--btn-primary);
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 0 0 6px;
+        }
+
+        .section-desc {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* ── Question Card ── */
+        .question-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 28px 36px;
+            margin-bottom: 10px;
+        }
+
+        .question-card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 0 0 14px;
+        }
+
+        /* ── Radio Option ── */
+        .q-option {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            border-radius: 10px;
+            border: 1.5px solid transparent;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+            margin-bottom: 4px;
+        }
+
+        .q-option:hover {
+            background: var(--light);
+            border-color: var(--light);
+        }
+
+        .q-option input[type="radio"] {
+            display: none;
+        }
+
+        .q-radio {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid var(--dark);
+            flex-shrink: 0;
+            transition: background 0.2s, border-color 0.2s;
+            position: relative;
+        }
+
+        .q-option:has(input:checked) .q-radio {
+            background: var(--standout);
+            border-color: var(--standout);
+        }
+
+        .q-option:has(input:checked) .q-radio::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--white);
+        }
+
+        .q-option:has(input:checked) {
+            background: var(--light);
+            border-color: var(--grayscale);
+        }
+
+        /* ── Nav Buttons ── */
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 36px;
+        }
     </style>
-
 </head>
 
 <body>
-    <header>
 
+    <input type="checkbox" id="nav-control">
+    <div class="main-header">
+        <div><a class="logo" href="./index.html"><img src="./logo.png" alt="logo"></a></div>
+        <nav class="nav">
 
-        <a class="logo" href="./index.html"><img src="./logo.png" alt="logo"></a>
+            <ul class="nav-links">
 
-        <nav>
-
-            <a href="./test.html">配對測驗</a>
-            <a href="./take me home.html">帶我回家</a>
-            <a href="./comminicate.html">交流平台</a>
-            <a href="#">寵物百科</a>
-            <a href="#">登入</a>
+                <li><a class="btn-test" id="btn-test_explain" href="./test-explain.html">配對測驗</a></li>
+                <li><a class="btn-encyclopedia" id="btn-encyclopedia" href="./encyclopedia.html">寵物百科</a></li>
+                <li><a class="btn-index" id="btn-index" href="#">虛擬寵物</a></li>
+                <li><a class="btn-takeMeHome" id="btn-takeMeHome" href="#">帶我回家</a></li>
+                <li><a class="btn-comminicate" id="btn-comminicate" href="./comminicate.html">交流平台</a></li>
+                <li><a class="btn-login" id="btn-login" href="./login.html">登入</a></li>
+            </ul>
         </nav>
-    </header>
-
-    <div class="test">
-        <section class="section1">
-            <h2>第一部分：現實環境與硬體條件（共 5 題）</h2>
-            <div class="section1 question1">
-                <h3>1. 請問您的居住空間類型與大小？</h3>
-                <label></label> <input id="" type="radio" name="question1">一房一廳/大套房（10-20 坪） </label>
-                <label></label><input id="" type="radio" name="question1">公寓/大樓（20 坪以上，無院子）</label>
-                <label></label><input id="" type="radio" name="question1">透天厝/有獨立院子 </label>
-            </div>
-
-            <div class="section1 question2">
-                <h3>2. 您的居住環境是否允許飼養寵物？</h3>
-                <label> <input id="" type="radio" name="question2">房東/管委會嚴格禁止貓狗（但可養籠飼小動物））</label>
-                <label> <input id="" type="radio" name="question2">可以養貓，但不能養狗（或有體型限制） </label>
-                <label> <input id="" type="radio" name="question2">完全無限制，皆可飼養</label>
-            </div>
-
-            <div class="section1 question3">
-                <h3>3. 您的同住狀態與同居人意願為何？</h3>
-                <label> <input id="" type="radio" name="question3">獨居，且無家人定期探訪</label>
-                <label> <input id="" type="radio" name="question3">有同住家人/室友，且全體皆支持養寵物 </label>
-                <label> <input id="" type="radio" name="question3">有同住家人/室友，但有人持中立或反對態度</label>
-                <label> <input id="" type="radio" name="question3">家中有嬰幼兒或免疫力較低長輩</label>
-
-            </div>
-
-            <div class="section1 question4">
-                <h3>4. 您或同住家人是否有已知的動物毛髮過敏史？</h3>
-                <label> <input id="" type="radio" name="question4">有嚴重過敏體質</label>
-                <label> <input id="" type="radio" name="question4">有輕微過敏，但可透過清淨機控制（10-20 坪） </label>
-                <label> <input id="" type="radio" name="question4">完全沒有過敏問題</label>
-            </div>
-
-            <div class="section1 question5">
-                <h3>5. 您預計每月能撥出多少預算在寵物身上（含飼料、醫療預備金、美容）？</h3>
-                <label> <input id="" type="radio" name="question5">1,000 元以下</label>
-                <label> <input id="" type="radio" name="question5">1,000 - 3,000 元 </label>
-                <label> <input id="" type="radio" name="question5">3,000 - 5,000 元</label>
-                <label> <input id="" type="radio" name="question5">5,000 元以上</label>
-            </div>
-
-        </section>
-
-        <section class="section2">
-            <h2>第二部分：生活作息與精力分配（共 5 題）</h2>
-            <div class="section2 question1">
-                <h3>1. 您每天平均出門工作/上課的時間有多長？</h3>
-                <label> <input id="" type="radio" name="question2-1">10 小時以上</label>
-                <label> <input id="" type="radio" name="question2-1"> 8 - 10 小時</label>
-                <label> <input id="" type="radio" name="question2-1">4 - 8 小時</label>
-                <label> <input id="" type="radio" name="question2-1">4 小時以下 </label>
-            </div>
-
-            <div class="section2 question2">
-                <h3>2. 您的休閒生活與外出頻率通常是？</h3>
-                <label> <input id="" type="radio" name="question2-2">狂熱戶外派：放假一定要去爬山、露營、奔跑</label>
-                <label> <input id="" type="radio" name="question2-2">適度活動派：喜歡散步、逛街、去咖啡廳</label>
-                <label> <input id="" type="radio" name="question2-2">居家宅屬性：放假只想追劇、打電動、睡覺</label>
-            </div>
-
-            <div class="section2 question3">
-                <h3>3. 您希望寵物在生活中扮演什麼樣的陪伴角色？</h3>
-                <label> <input id="" type="radio" name="question2-3">黏人精：希望牠隨時熱情迎接我、形影不離</label>
-                <label> <input id="" type="radio" name="question2-3">獨立室友：各過各的，偶爾過來撒嬌互動就好</label>
-                <label> <input id="" type="radio" name="question2-3">療癒觀察者：不需要太多觸摸，看著牠活動就很治癒</label>
-
-            </div>
-
-            <div class="section2 question4">
-                <h3>4. 如果寵物會發出聲音（如吠叫、叫春、鳥鳴），您的忍受度是？</h3>
-                <label> <input id="" type="radio" name="question2-4">希望絕對安靜</label>
-                <label> <input id="" type="radio" name="question2-4">偶爾叫可以，但不能持續不斷</label>
-                <label> <input id="" type="radio" name="question2-4">完全不介意，熱鬧一點很好</label>
-            </div>
-
-            <div class="section2 question5">
-                <h3>5. 在未來的 5 到 10 年內，您是否可能面臨重大生涯變動？</h3>
-                <label> <input id="" type="radio" name="question2-5">有計畫出國留學、頻繁外派或可能頻繁搬家</label>
-                <label> <input id="" type="radio" name="question2-5">狀態不確定，可能會變動 </label>
-                <label> <input id="" type="radio" name="question2-5">生活非常穩定，短期內不會有大變動</label>
-            </div>
-        </section>
-
-
-        <section class="section3">
-            <h2>第三部分：心理準備與耐受度（共 5 題）</h2>
-            <div class="section3 question1">
-                <h3>1. 對於寵物掉毛、亂抓、咬壞家具或翻倒東西，您的心理準備是？</h3>
-                <label> <input id="" type="radio" name="question3-1">沒辦法接受，我有一點潔癖或極度愛惜物品</label>
-                <label> <input id="" type="radio" name="question3-1">碎碎念但可以忍受，會試著引導和收好物品</label>
-                <label> <input id="" type="radio" name="question3-1">沒關係，家具壞了再買，動物天性本就如此</label>
-
-            </div>
-
-            <div class="section3 question2">
-                <h3>2. 關於「天天清理排泄物」以及「偶爾處理嘔吐物/腹瀉」，您的接受度是？</h3>
-                <label> <input id="" type="radio" name="question3-2">覺得很抗拒，希望清理頻率越低越好</label>
-                <label> <input id="" type="radio" name="question3-2">可以接受每天定時清理，只要不弄髒手 </label>
-                <label> <input id="" type="radio" name="question3-2">完全沒問題，鏟屎是我的樂趣與責任</label>
-            </div>
-
-            <div class="section3 question3">
-                <h3>3. 如果一隻新寵物帶回家，連續一個月都在亂尿尿或半夜哭叫，您會？</h3>
-                <label> <input id="" type="radio" name="question3-3">感到極度崩潰，可能考慮幫牠找新主人</label>
-                <label> <input id="" type="radio" name="question3-3">上網查資料或請教專家，雖然挫折但會努力矯正 </label>
-                <label> <input id="" type="radio" name="question3-3">非常有耐心，理解這是適應期，願意花幾個月陪伴牠適應</label>
-
-            </div>
-
-            <div class="section3 question4">
-                <h3>4. 您過去是否有過「獨自照料」一隻寵物直到終老的經驗？</h3>
-                <label> <input id="" type="radio" name="question3-4">完全沒有經驗（純新手）</label>
-                <label> <input id="" type="radio" name="question3-4">曾經飼養過，但飼養經驗不足5次（半熟手）</label>
-                <label> <input id="" type="radio" name="question3-4">有豐富的自主照顧經驗（老手）</label>
-            </div>
-
-            <div class="section3 question5">
-                <h3>5. 當寵物年老生病，需要每天餵藥、頻繁跑醫院且花費龐大時，您的想法是？</h3>
-                <label> <input id="" type="radio" name="question3-5">壓力極大，不確定自己能不能承擔這種心理與經濟負擔</label>
-                <label> <input id="" type="radio" name="question3-5">會盡力而為，在經濟容許範圍內做到最好</label>
-                <label> <input id="" type="radio" name="question3-5">承諾不離不棄，無論多辛苦都會照顧牠到最後</label>
-            </div>
-        </section>
-
+        <label for="nav-control" class="hb">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </label>
     </div>
-    <footer>
-        <div class="footertext">
-            <p>連絡電話: 09123456789 聯絡信箱:aaaaaaaaaa@gmail.地址:oo路xx號</p>
+
+    <main>
+        <div class="quiz-wrap">
+
+            <!-- ── Progress Bar ── -->
+            <div class="quiz-progress">
+                <div class="steps-track">
+                    <div class="step-circle active" id="step-1">1</div>
+                    <div class="step-line" id="line-12"></div>
+                    <div class="step-circle" id="step-2">2</div>
+                    <div class="step-line" id="line-23"></div>
+                    <div class="step-circle" id="step-3">3</div>
+                    <div class="step-line" id="line-34"></div>
+                    <div class="step-circle" id="step-4">4</div>
+                </div>
+                <span class="progress-pct" id="progress-pct">25%</span>
+            </div>
+
+            <!-- ════ Section 1：環境條件 ════ -->
+            <section class="quiz-section active" id="section-1">
+
+                <div class="section-header">
+                    <span class="section-chip">第一部分　共五題</span>
+                    <h1 class="section-title">環境條件</h1>
+                    <p class="section-desc">讓我們先了解你的生活空間與基本條件，幫助我們找到最適合你現實情況的寵物。</p>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q1　你目前的居住空間大小？</h3>
+                    <label class="q-option"><input type="radio" name="q1" data-dim="環境" data-pts="0"><span
+                            class="q-radio"></span><span>小於 20 坪（套房或小公寓）</span></label>
+                    <label class="q-option"><input type="radio" name="q1" data-dim="環境" data-pts="1"><span
+                            class="q-radio"></span><span>20-40 坪（一般公寓）</span></label>
+                    <label class="q-option"><input type="radio" name="q1" data-dim="環境" data-pts="2"><span
+                            class="q-radio"></span><span>40-60 坪（較大公寓或透天）</span></label>
+                    <label class="q-option"><input type="radio" name="q1" data-dim="環境" data-pts="3"><span
+                            class="q-radio"></span><span>60 坪以上（大坪數或有院子）</span></label>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q2　你的住所是否允許飼養寵物？</h3>
+                    <label class="q-option"><input type="radio" name="q2" data-dim="環境" data-pts="3"><span
+                            class="q-radio"></span><span>是，無任何限制</span></label>
+                    <label class="q-option"><input type="radio" name="q2" data-dim="環境" data-pts="2"><span
+                            class="q-radio"></span><span>是，但有體重或種類限制</span></label>
+                    <label class="q-option"><input type="radio" name="q2" data-dim="環境" data-pts="1"><span
+                            class="q-radio"></span><span>目前不確定，需要確認</span></label>
+                    <label class="q-option"><input type="radio" name="q2" data-dim="環境" data-pts="0"><span
+                            class="q-radio"></span><span>暫時不行，但有計畫搬家</span></label>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q3　你每月可以用在寵物上的預算大約是？</h3>
+                    <label class="q-option"><input type="radio" name="q3" data-dim="經濟" data-pts="2"><span
+                            class="q-radio"></span><span>3,000 元以下</span></label>
+                    <label class="q-option"><input type="radio" name="q3" data-dim="經濟" data-pts="5"><span
+                            class="q-radio"></span><span>3,000 - 6,000 元</span></label>
+                    <label class="q-option"><input type="radio" name="q3" data-dim="經濟" data-pts="7"><span
+                            class="q-radio"></span><span>6,000 - 10,000 元</span></label>
+                    <label class="q-option"><input type="radio" name="q3" data-dim="經濟" data-pts="9"><span
+                            class="q-radio"></span><span>10,000 元以上</span></label>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q4　你的住所附近有公園或可以遛狗的空間嗎？</h3>
+                    <label class="q-option"><input type="radio" name="q4" data-dim="環境" data-pts="3"><span
+                            class="q-radio"></span><span>步行 5 分鐘內有大型公園</span></label>
+                    <label class="q-option"><input type="radio" name="q4" data-dim="環境" data-pts="2"><span
+                            class="q-radio"></span><span>步行 10-15 分鐘可到達</span></label>
+                    <label class="q-option"><input type="radio" name="q4" data-dim="環境" data-pts="1"><span
+                            class="q-radio"></span><span>較遠，需要開車前往</span></label>
+                    <label class="q-option"><input type="radio" name="q4" data-dim="環境" data-pts="0"><span
+                            class="q-radio"></span><span>附近沒有適合的空間</span></label>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q5　你家中是否有其他寵物或小朋友？</h3>
+                    <label class="q-option"><input type="radio" name="q5" data-dim="包容力" data-pts="3"><span
+                            class="q-radio"></span><span>沒有，只有我一人</span></label>
+                    <label class="q-option"><input type="radio" name="q5" data-dim="包容力" data-pts="3"><span
+                            class="q-radio"></span><span>有大人同住，沒有寵物或小孩</span></label>
+                    <label class="q-option"><input type="radio" name="q5" data-dim="包容力" data-pts="2"><span
+                            class="q-radio"></span><span>有其他寵物</span></label>
+                    <label class="q-option"><input type="radio" name="q5" data-dim="包容力" data-pts="1"><span
+                            class="q-radio"></span><span>家中有 12 歲以下的小孩</span></label>
+                </div>
+
+                <div class="quiz-nav">
+                    <button class="btn btn-b" disabled>上一部份</button>
+                    <button class="btn btn-c" id="btn-next-1">下一部份</button>
+                </div>
+            </section>
+
+            <!-- ════ Section 2：生活作息 ════ -->
+            <section class="quiz-section" id="section-2">
+
+                <div class="section-header">
+                    <span class="section-chip">第二部分　共五題</span>
+                    <h1 class="section-title">生活作息與精力分配</h1>
+                    <p class="section-desc">了解你的日常生活節奏，找出最適合你作息的寵物夥伴。</p>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q6　你平均每天在家的時間大約是？</h3>
+                    <label class="q-option"><input type="radio" name="q6" data-dim="時間" data-pts="0"><span
+                            class="q-radio"></span><span>不到 4 小時（幾乎整天外出）</span></label>
+                    <label class="q-option"><input type="radio" name="q6" data-dim="時間" data-pts="1"><span
+                            class="q-radio"></span><span>4-8 小時（一般上班族）</span></label>
+                    <label class="q-option"><input type="radio" name="q6" data-dim="時間" data-pts="2"><span
+                            class="q-radio"></span><span>8-12 小時（半天在家）</span></label>
+                    <label class="q-option"><input type="radio" name="q6" data-dim="時間" data-pts="3"><span
+                            class="q-radio"></span><span>12 小時以上（大部分時間在家）</span></label>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q7　你多久出遠門（超過一晚）一次？</h3>
+                    <label class="q-option"><input type="radio" name="q7" data-dim="時間" data-pts="0"><span
+                            class="q-radio"></span><span>幾乎每個月都有</span></label>
+                    <label class="q-option"><input type="radio" name="q7" data-dim="時間" data-pts="1"><span
+                            class="q-radio"></span><span>大概每季一次</span></label>
+                    <label class="q-option"><input type="radio" name="q7" data-dim="時間" data-pts="2"><span
+                            class="q-radio"></span><span>大概每年一到兩次</span></label>
+                    <label class="q-option"><input type="radio" name="q7" data-dim="時間" data-pts="3"><span
+                            class="q-radio"></span><span>幾乎不出遠門</span></label>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q8　你的運動習慣如何？</h3>
+                    <label class="q-option"><input type="radio" name="q8" data-dim="時間" data-pts="0"><span
+                            class="q-radio"></span><span>幾乎不運動</span></label>
+                    <label class="q-option"><input type="radio" name="q8" data-dim="時間" data-pts="1"><span
+                            class="q-radio"></span><span>偶爾散步或輕度活動</span></label>
+                    <label class="q-option"><input type="radio" name="q8" data-dim="時間" data-pts="2"><span
+                            class="q-radio"></span><span>每週固定運動 2-3 次</span></label>
+                    <label class="q-option"><input type="radio" name="q8" data-dim="時間" data-pts="3"><span
+                            class="q-radio"></span><span>每天都有高強度運動</span></label>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q9　你在家時通常喜歡做什麼？</h3>
+                    <label class="q-option"><input type="radio" name="q9"><span
+                            class="q-radio"></span><span>安靜閱讀、看電視或工作</span></label>
+                    <label class="q-option"><input type="radio" name="q9"><span
+                            class="q-radio"></span><span>小幅度的家事或休閒</span></label>
+                    <label class="q-option"><input type="radio" name="q9"><span
+                            class="q-radio"></span><span>在家做運動或較活躍的活動</span></label>
+                    <label class="q-option"><input type="radio" name="q9"><span
+                            class="q-radio"></span><span>常在陽台或室外活動</span></label>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q10　如果你要出遠門，寵物的照顧怎麼安排？</h3>
+                    <label class="q-option"><input type="radio" name="q10"><span
+                            class="q-radio"></span><span>有家人或室友可以幫忙</span></label>
+                    <label class="q-option"><input type="radio" name="q10"><span
+                            class="q-radio"></span><span>可以交給附近的朋友</span></label>
+                    <label class="q-option"><input type="radio" name="q10"><span
+                            class="q-radio"></span><span>會送去寵物旅館</span></label>
+                    <label class="q-option"><input type="radio" name="q10"><span
+                            class="q-radio"></span><span>目前沒有解決方案</span></label>
+                </div>
+
+                <div class="quiz-nav">
+                    <button class="btn btn-b" id="btn-prev-2">上一部份</button>
+                    <button class="btn btn-c" id="btn-next-2">下一部份</button>
+                </div>
+            </section>
+
+            <!-- ════ Section 3：心理準備 ════ -->
+            <section class="quiz-section" id="section-3">
+
+                <div class="section-header">
+                    <span class="section-chip">第三部分　共五題</span>
+                    <h1 class="section-title">心理準備與耐受度</h1>
+                    <p class="section-desc">最後了解你的心理狀態與承受能力，確保你和毛孩都能幸福生活。</p>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q11　你有飼養寵物的經驗嗎？</h3>
+                    <label class="q-option"><input type="radio" name="q11" data-dim="穩定度" data-pts="0"><span
+                            class="q-radio"></span><span>完全沒有，是新手</span></label>
+                    <label class="q-option"><input type="radio" name="q11" data-dim="穩定度" data-pts="1"><span
+                            class="q-radio"></span><span>小時候家裡有養過</span></label>
+                    <label class="q-option"><input type="radio" name="q11" data-dim="穩定度" data-pts="2"><span
+                            class="q-radio"></span><span>成年後有獨立飼養過</span></label>
+                    <label class="q-option"><input type="radio" name="q11" data-dim="穩定度" data-pts="3"><span
+                            class="q-radio"></span><span>有豐富的飼養經驗</span></label>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q12　你對於寵物掉毛、異味的接受度？</h3>
+                    <label class="q-option"><input type="radio" name="q12" data-dim="包容力" data-pts="0"><span
+                            class="q-radio"></span><span>完全無法接受</span></label>
+                    <label class="q-option"><input type="radio" name="q12" data-dim="包容力" data-pts="1"><span
+                            class="q-radio"></span><span>可以接受少量，但需要定期清潔</span></label>
+                    <label class="q-option"><input type="radio" name="q12" data-dim="包容力" data-pts="2"><span
+                            class="q-radio"></span><span>可以接受，會勤加打掃</span></label>
+                    <label class="q-option"><input type="radio" name="q12" data-dim="包容力" data-pts="3"><span
+                            class="q-radio"></span><span>完全不介意</span></label>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q13　你對於寵物的吠叫或鳴叫聲的包容度？</h3>
+                    <label class="q-option"><input type="radio" name="q13" data-dim="包容力" data-pts="0"><span
+                            class="q-radio"></span><span>完全無法接受噪音</span></label>
+                    <label class="q-option"><input type="radio" name="q13" data-dim="包容力" data-pts="1"><span
+                            class="q-radio"></span><span>可接受偶爾的聲音</span></label>
+                    <label class="q-option"><input type="radio" name="q13" data-dim="包容力" data-pts="2"><span
+                            class="q-radio"></span><span>能接受正常的動物聲音</span></label>
+                    <label class="q-option"><input type="radio" name="q13" data-dim="包容力" data-pts="3"><span
+                            class="q-radio"></span><span>完全不介意任何聲音</span></label>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q14　你認養寵物的主要動機是？</h3>
+                    <label class="q-option"><input type="radio" name="q14" data-dim="穩定度" data-pts="2"><span
+                            class="q-radio"></span><span>需要陪伴，減少孤獨感</span></label>
+                    <label class="q-option"><input type="radio" name="q14" data-dim="穩定度" data-pts="3"><span
+                            class="q-radio"></span><span>喜歡動物，想要給牠一個家</span></label>
+                    <label class="q-option"><input type="radio" name="q14" data-dim="穩定度" data-pts="1"><span
+                            class="q-radio"></span><span>家人或孩子想要養</span></label>
+                    <label class="q-option"><input type="radio" name="q14" data-dim="穩定度" data-pts="0"><span
+                            class="q-radio"></span><span>出於衝動，但也在認真考慮</span></label>
+                </div>
+
+                <div class="question-card">
+                    <h3>Q15　你預計和這隻寵物一起生活多久？</h3>
+                    <label class="q-option"><input type="radio" name="q15" data-dim="穩定度" data-pts="0"><span
+                            class="q-radio"></span><span>目前還不確定</span></label>
+                    <label class="q-option"><input type="radio" name="q15" data-dim="穩定度" data-pts="1"><span
+                            class="q-radio"></span><span>如果適應良好，希望長期飼養</span></label>
+                    <label class="q-option"><input type="radio" name="q15" data-dim="穩定度" data-pts="2"><span
+                            class="q-radio"></span><span>已做好 10-15 年的長期承諾</span></label>
+                    <label class="q-option"><input type="radio" name="q15" data-dim="穩定度" data-pts="3"><span
+                            class="q-radio"></span><span>已做好超過 15 年的終生承諾</span></label>
+                </div>
+
+                <div class="quiz-nav">
+                    <button class="btn btn-b" id="btn-prev-3">上一部份</button>
+                    <button class="btn btn-c" id="btn-next-3">查看結果</button>
+                </div>
+
+
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 col-md-4">
+                    <a class="nav_logo" href="./index.html"><img src="./logo.png" alt="logo"></a>
+                    <h3 class="footer-logo">寵物合夥人</h3>
+                    <p class="footer-tagline">每段陪伴，都值得被認真開始。</p>
+                </div>
+
+                <div class="col-4 col-md-4">
+                    <h4 class="footer-section-title">聯絡我們</h4>
+                    <span class="footer-text">
+                        <p>服務時間：09:00 - 18:00
+                        <p>聯絡信箱：qwwerrt@gmail.com
+                        <p>聯絡電話：0900000000
+                    </span>
+                </div>
+
+                <div class="col-4 col-md-4 footer-links">
+                    <h4 class="footer-section-title">快速連結</h4>
+                    <ul class="footer-links">
+                        <li><a class="btn-test" id="btn-test_explain" href="./test-explain.html">配對測驗</a></li>
+                        <li><a class="btn-encyclopedia" id="btn-encyclopedia" href="./encyclopedia.html">寵物百科</a></li>
+                        <li><a class="btn-index" id="btn-index" href="#">虛擬寵物</a></li>
+                        <li><a class="btn-takeMeHome" id="btn-takeMeHome" href="#">帶我回家</a></li>
+                        <li><a class="btn-comminicate" id="btn-comminicate" href="./comminicate.html">交流平台</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-12">
+                    <div class="footer-bottom">
+                        © 2026 寵物合夥人．All rights reserved.
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <script src="./chart.umd.min.js"></script>
+    <script>
+
+
+        let current = 1;
+
+        function go(n) {
+            document.getElementById('section-' + current).classList.remove('active');
+            document.getElementById('section-' + n).classList.add('active');
+            current = n;
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateProgress() {
+            const pcts = { 1: '25%', 2: '50%', 3: '75%' };
+            document.getElementById('progress-pct').textContent = pcts[current];
+
+            [1, 2, 3, 4].forEach(i => {
+                document.getElementById('step-' + i).classList.toggle('active', i <= current);
+            });
+
+            [['12', 1], ['23', 2], ['34', 3]].forEach(([id, threshold]) => {
+                document.getElementById('line-' + id).classList.toggle('active', current > threshold);
+            });
+        }
+
+        function saveAndRedirect() {
+            const scores = { 環境: 0, 經濟: 0, 時間: 0, 包容力: 0, 穩定度: 0 };
+            document.querySelectorAll('input[type="radio"]:checked').forEach(r => {
+                const dim = r.dataset.dim;
+                const pts = parseInt(r.dataset.pts);
+                if (dim && Object.hasOwn(scores, dim)) {
+                    scores[dim] += pts;
+                }
+            });
+            localStorage.setItem('petQuizScores', JSON.stringify(scores));
+            window.location.href = './result.html';
+        }
+
+        document.getElementById('btn-next-1').addEventListener('click', () => go(2));
+        document.getElementById('btn-prev-2').addEventListener('click', () => go(1));
+        document.getElementById('btn-next-2').addEventListener('click', () => go(3));
+        document.getElementById('btn-prev-3').addEventListener('click', () => go(2));
+        document.getElementById('btn-next-3').addEventListener('click', saveAndRedirect);
+
+    </script>
 
 </body>
 

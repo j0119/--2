@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>寵物合夥人｜犬科品種總覽</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./header.css">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--light);
+            /* color: #3b312c; */
+        }
+
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        .page-hero {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            margin: 30px 0 20px;
+            padding: 24px 30px;
+            background-color: #f7ede3;
+            border-radius: 18px;
+        }
+
+        .page-title {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .page-title .category-text {
+            font-size: 14px;
+            color: #7e6d5e;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .page-title h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0;
+            color: #3b312c;
+        }
+
+        .page-title p {
+            font-size: 14px;
+            color: #716053;
+            max-width: 520px;
+            line-height: 1.8;
+        }
+
+        .search-panel {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 320px;
+        }
+
+        .search-input {
+            flex: 1;
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d9c9b6;
+            border-radius: 999px;
+            background-color: #fff;
+            font-size: 14px;
+        }
+
+        .search-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 999px;
+            background-color: #c9975b;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .chip-list {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .chip {
+            padding: 8px 14px;
+            border-radius: 999px;
+            background-color: #e7d7c4;
+            color: #5d4a39;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .page-body {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 24px;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .sidebar-card {
+            background-color: #fff;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-card h2 {
+            font-size: 14px;
+            color: #7e6d5e;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 16px;
+        }
+
+        .sidebar-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 10px;
+        }
+
+        .sidebar-list li {
+            padding: 12px 14px;
+            border-radius: 14px;
+            background-color: #fbf5ef;
+            color: #4d4034;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .sidebar-list li:hover,
+        .sidebar-list li.active {
+            background-color: #d9c0a0;
+            color: #3b312c;
+        }
+
+        .breed-count {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 18px;
+            font-size: 13px;
+            color: #77614e;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .breed-card {
+            background-color: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            min-height: 420px;
+        }
+
+        .breed-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .breed-content {
+            padding: 22px 20px 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+        }
+
+        .breed-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #3b312c;
+            margin-bottom: 10px;
+        }
+
+        .breed-meta {
+            font-size: 13px;
+            color: #7e6d5e;
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+
+        .breed-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .breed-badge {
+            padding: 8px 12px;
+            border-radius: 999px;
+            background-color: #f4e6d9;
+            color: #7e6d5e;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .breed-link {
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: 1px solid #c9975b;
+            background-color: #c9975b;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            text-align: center;
+        }
+
+
+        @media (max-width: 1080px) {
+            .card-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+
+            .page-hero,
+            .page-body {
+                flex-direction: column;
+                display: block;
+            }
+
+            .page-hero {
+                padding: 20px;
+            }
+
+            .page-body {
+                grid-template-columns: 1fr;
+            }
+
+            .search-panel {
+                width: 100%;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                order: 2;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" id="nav-control">
+    <div class="main-header">
+        <div><a class="logo" href="./index.html"><img src="./logo.png" alt="logo"></a></div>
+        <nav class="nav">
+
+            <ul class="nav-links">
+
+                <li><a class="btn-test" id="btn-test_explain" href="./test-explain.html">配對測驗</a></li>
+                <li><a class="btn-encyclopedia" id="btn-encyclopedia" href="./encyclopedia.html">寵物百科</a></li>
+                <li><a class="btn-index" id="btn-index" href="#">虛擬寵物</a></li>
+                <li><a class="btn-takeMeHome" id="btn-takeMeHome" href="#">帶我回家</a></li>
+                <li><a class="btn-comminicate" id="btn-comminicate" href="./comminicate.html">交流平台</a></li>
+                <li><a class="btn-login" id="btn-login" href="./login.html">登入</a></li>
+            </ul>
+        </nav>
+        <label for="nav-control" class="hb">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </label>
+    </div>
+
+    <div class="page-container">
+        <section class="page-hero">
+            <div class="page-title">
+                <div class="category-text">犬科 · Canidae</div>
+                <h1>犬科品種總覽</h1>
+                <p>探索犬科品種中的熱門狗狗，從可愛小型犬到活力大型犬，找到你喜歡的毛孩夥伴。</p>
+                <div class="chip-list">
+                    <span class="chip">全部</span>
+                    <span class="chip">大型犬</span>
+                    <span class="chip">中型犬</span>
+                    <span class="chip">小型犬</span>
+                </div>
+            </div>
+            <div class="search-panel">
+                <input id="searchInput" class="search-input" type="text" placeholder="搜尋犬科品種名稱">
+                <button class="search-btn" onclick="performSearch()">搜尋</button>
+            </div>
+        </section>
+
+        <div class="page-body">
+            <aside class="sidebar">
+                <div class="sidebar-card">
+                    <h2>品種分類</h2>
+                    <ul class="sidebar-list">
+                        <li class="active">全部犬種</li>
+                        <li>大型犬</li>
+                        <li>中型犬</li>
+                        <li>小型犬</li>
+                        <li>工作犬</li>
+                        <li>伴侶犬</li>
+                    </ul>
+                </div>
+                <div class="sidebar-card">
+                    <h2>篩選條件</h2>
+                    <ul class="sidebar-list">
+                        <li>短毛</li>
+                        <li>長毛</li>
+                        <li>親人</li>
+                        <li>適合新手</li>
+                    </ul>
+                </div>
+            </aside>
+
+            <section class="card-grid" id="breedGrid"></section>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 col-md-4">
+                    <a class="nav_logo" href="./index.html"><img src="./logo.png" alt="logo"></a>
+                    <h3 class="footer-logo">寵物合夥人</h3>
+                    <p class="footer-tagline">每段陪伴，都值得被認真開始。</p>
+                </div>
+
+                <div class="col-4 col-md-4">
+                    <h4 class="footer-section-title">聯絡我們</h4>
+                    <span class="footer-text">
+                        <p>服務時間：09:00 - 18:00
+                        <p>聯絡信箱：qwwerrt@gmail.com
+                        <p>聯絡電話：0900000000
+                    </span>
+                </div>
+
+                <div class="col-4 col-md-4 footer-links">
+                    <h4 class="footer-section-title">快速連結</h4>
+                    <ul class="footer-links">
+                        <li><a class="btn-test" id="btn-test_explain" href="./test-explain.html">配對測驗</a></li>
+                        <li><a class="btn-encyclopedia" id="btn-encyclopedia" href="./encyclopedia.html">寵物百科</a></li>
+                        <li><a class="btn-index" id="btn-index" href="#">虛擬寵物</a></li>
+                        <li><a class="btn-takeMeHome" id="btn-takeMeHome" href="#">帶我回家</a></li>
+                        <li><a class="btn-comminicate" id="btn-comminicate" href="./comminicate.html">交流平台</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-12">
+                    <div class="footer-bottom">
+                        © 2026 寵物合夥人．All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const breedData = [
+            {
+                name: '柴犬',
+                description: '活潑忠誠，是兼具活力與溫柔的家庭伴侶。',
+                label: '中型犬',
+                image: './picture/7 encyclopedia/Variety list/01.jpg'
+            },
+            {
+                name: '薩摩耶',
+                description: '溫和親人，外型優雅，是很受歡迎的家庭犬。',
+                label: '大型犬',
+                image: './picture/7 encyclopedia/Variety list/02.jpg'
+            },
+            {
+                name: '金毛獵犬',
+                description: '友善、活力十足，喜歡與人互動。',
+                label: '大型犬',
+                image: './picture/7 encyclopedia/Variety list/03.jpg'
+            },
+            {
+                name: '貴賓犬',
+                description: '聰明優雅，適合公寓生活與過敏體質家庭。',
+                label: '小型犬',
+                image: './picture/7 encyclopedia/Variety list/04.jpg'
+            },
+            {
+                name: '哈士奇',
+                description: '精力充沛且活潑，喜歡戶外活動與運動。',
+                label: '大型犬',
+                image: './picture/7 encyclopedia/Variety list/05.jpg'
+            },
+            {
+                name: '柯基',
+                description: '短腿可愛、個性親人，適合家庭飼養。',
+                label: '小型犬',
+                image: './picture/7 encyclopedia/Variety list/06.jpg'
+            },
+            {
+                name: '邊境牧羊犬',
+                description: '聰明且反應快，適合喜歡訓練的飼主。',
+                label: '中型犬',
+                image: './picture/7 encyclopedia/Variety list/07.jpg'
+            },
+            {
+                name: '博美犬',
+                description: '體型嬌小，適合小家庭。',
+                label: '小型犬',
+                image: './picture/7 encyclopedia/Variety list/08.jpg'
+            },
+            {
+                name: '拉不拉多',
+                description: '性格溫和、學習力強，是理想的家庭犬。',
+                label: '大型犬',
+                image: './picture/7 encyclopedia/Variety list/09.jpg'
+            }
+        ];
+
+        function renderBreeds(items) {
+            const grid = document.getElementById('breedGrid');
+            grid.innerHTML = '';
+
+            items.forEach(breed => {
+                const card = document.createElement('article');
+                card.className = 'breed-card';
+                card.innerHTML = `
+                    <img src="${breed.image}" alt="${breed.name}">
+                    <div class="breed-content">
+                        <div>
+                            <div class="breed-name">${breed.name}</div>
+                            <div class="breed-meta">${breed.description}</div>
+                        </div>
+                        <div class="breed-actions">
+                            <div class="breed-badge">${breed.label}</div>
+                            <a href="#" class="breed-link">查看詳情</a>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function performSearch() {
+            const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+            const filtered = breedData.filter(item =>
+                item.name.toLowerCase().includes(keyword) ||
+                item.description.toLowerCase().includes(keyword) ||
+                item.label.toLowerCase().includes(keyword)
+            );
+            renderBreeds(filtered);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderBreeds(breedData);
+            document.getElementById('searchInput').addEventListener('keydown', e => {
+                if (e.key === 'Enter') performSearch();
+            });
+        });
+    </script>
+</body>
+
+</html>

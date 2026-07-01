@@ -1,45 +1,412 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>寵物合夥人｜寵物百科</title>
 
-    <link rel="icon" href="./logo.png" type="image/png">
-    <link rel="stylesheet" href="header.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./header.css">
     <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--light);
+        }
+
+        .page-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 搜尋區 */
+        .search-section {
+            margin-bottom: 40px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #c9975b;
+        }
+
+        .filter-btn {
+            padding: 12px 25px;
+            background-color: white;
+            color: #666;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            border-color: #c9975b;
+            color: #c9975b;
+        }
+
+        .content-area {
+            width: 100%;
+        }
+
+        .pet-item {
+            display: grid;
+            grid-template-columns: minmax(260px, 1fr) minmax(300px, 1fr);
+            gap: 0;
+            align-items: stretch;
+            margin: 0 auto 50px auto;
+            max-width: 980px;
+            height: 340px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .pet-item.reverse {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .pet-item.reverse .pet-image {
+            order: 2;
+        }
+
+        .pet-item.reverse .pet-content {
+            order: 1;
+        }
+
+        .pet-category,
+        .pet-title,
+        .pet-description {
+            color: inherit;
+        }
+
+        .pet-image {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .pet-content {
+            padding: 40px;
+            min-height: 300px;
+            height: 340px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pet-category {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            color: inherit;
+        }
+
+        .pet-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: inherit;
+        }
+
+        .pet-description {
+            font-size: 14px;
+            color: inherit;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #c9975b;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background-color 0.3s, opacity 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .view-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* 麵包屑樣式 */
+        .breadcrumb a {
+            color: #c9975b;
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            color: #666;
+        }
+
+        .pet-content .btn {
+            align-self: flex-start;
+        }
 
 
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .content-area {
+                width: 100%;
+            }
+
+            .pet-item {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .pet-item.reverse {
+                grid-template-columns: 1fr;
+            }
+
+            .pet-image {
+                height: 200px;
+            }
+
+            .pet-content {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-    <header>
+    <input type="checkbox" id="nav-control">
+    <div class="main-header">
+        <div><a class="logo" href="./index.html"><img src="./logo.png" alt="logo"></a></div>
+        <nav class="nav">
 
-        <a class="logo" href="./index.html"><img src="./logo.png" alt="logo"></a>
+            <ul class="nav-links">
 
-        <nav>
-
-            <a href="./test.html">配對測驗</a>
-            <a href="./take me home.html">帶我回家</a>
-            <a href="./comminicate.html">交流平台</a>
-            <a href="#">寵物百科</a>
-            <a href="#">登入</a>
+                <li><a class="btn-test" id="btn-test_explain" href="./test-explain.html">配對測驗</a></li>
+                <li><a class="btn-encyclopedia" id="btn-encyclopedia" href="./encyclopedia.html">寵物百科</a></li>
+                <li><a class="btn-index" id="btn-index" href="#">虛擬寵物</a></li>
+                <li><a class="btn-takeMeHome" id="btn-takeMeHome" href="#">帶我回家</a></li>
+                <li><a class="btn-comminicate" id="btn-comminicate" href="./comminicate.html">交流平台</a></li>
+                <li><a class="btn-login" id="btn-login" href="./login.html">登入</a></li>
+            </ul>
         </nav>
-    </header>
+        <label for="nav-control" class="hb">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </label>
+    </div>
 
+    <div class="page-container">
+        <!-- 搜尋區 -->
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="搜尋寵物品種、特徵...">
+            </div>
+            <button class="filter-btn">篩選</button>
+        </div>
 
+        <!-- 麵包屑 -->
+        <div class="breadcrumb" style="margin-bottom: 20px; font-size: 14px; color: #666;">
+            <a href="#" style="color: #c9975b; text-decoration: none;">寵物百科</a>
+            <span style="margin: 0 8px;">&gt;</span>
+            <span>分類總覽</span>
+        </div>
 
+        <!-- 內容容器 -->
+        <div class="content-area">
+            <div id="petContainer">
+                <!-- 動態生成卡片 -->
+            </div>
+        </div>
+    </div>
 
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 col-md-4">
+                    <a class="nav_logo" href="./index.html"><img src="./logo.png" alt="logo"></a>
+                    <h3 class="footer-logo">寵物合夥人</h3>
+                    <p class="footer-tagline">每段陪伴，都值得被認真開始。</p>
+                </div>
 
-    <footer>
+                <div class="col-4 col-md-4">
+                    <h4 class="footer-section-title">聯絡我們</h4>
+                    <span class="footer-text">
+                        <p>服務時間：09:00 - 18:00
+                        <p>聯絡信箱：qwwerrt@gmail.com
+                        <p>聯絡電話：0900000000
+                    </span>
+                </div>
 
-        <div class="footertext">
-            <p>連絡電話: 09123456789 聯絡信箱:aaaaaaaaaa@gmail.地址:oo路xx號</p>
+                <div class="col-4 col-md-4 footer-links">
+                    <h4 class="footer-section-title">快速連結</h4>
+                    <ul class="footer-links">
+                        <li><a class="btn-test" id="btn-test_explain" href="./test-explain.html">配對測驗</a></li>
+                        <li><a class="btn-encyclopedia" id="btn-encyclopedia" href="./encyclopedia.html">寵物百科</a></li>
+                        <li><a class="btn-index" id="btn-index" href="#">虛擬寵物</a></li>
+                        <li><a class="btn-takeMeHome" id="btn-takeMeHome" href="#">帶我回家</a></li>
+                        <li><a class="btn-comminicate" id="btn-comminicate" href="./comminicate.html">交流平台</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-12">
+                    <div class="footer-bottom">
+                        © 2026 寵物合夥人．All rights reserved.
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
-</body>
 
-</html>
+    <script>
+        // 寵物品種數據（包含卡片底色）
+        const petData = [
+            {
+                id: 1,
+                category: '犬科',
+                categoryEn: 'Canidae',
+                name: '犬科寵物',
+                description: '犬科動物是最受歡迎的家庭寵物之一。它們以忠誠、友善和聰慧而聞名。不同的犬種有著不同的大小、性格和需求。無論是活潑的小型犬還是溫柔的大型犬，犬科寵物都能成為完美的家庭伴侶。',
+                image: './picture/7 encyclopedia/encyclopedia/01.jpg',
+                bgColor: '#F2ECE4',
+                link: './Variety list.html'
+            },
+            {
+                id: 2,
+                category: '貓科',
+                categoryEn: 'Feline',
+                name: '貓科寵物',
+                description: '貓科動物以其優雅和獨立的性格而聞名。它們是聰慧、靈活且極具個性的寵物。貓咪適應力強，無論是長毛貓還是短毛貓，都能在各種家庭環境中生活。許多貓咪性格親人，喜歡與主人互動和親近。',
+                image: './picture/7 encyclopedia/encyclopedia/02.jpg',
+                bgColor: '#BDAB9B'
+            },
+            {
+                id: 3,
+                category: '小寵物',
+                categoryEn: 'Small Pets',
+                name: '小寵物',
+                description: '小寵物包括倉鼠、兔子、豚鼠等小型動物。它們可愛、容易照顧，是兒童和初次養寵物者的理想選擇。小寵物體型小，適合公寓居住，但它們仍需要適當的照顧、營養和社交互動。',
+                image: './picture/7 encyclopedia/encyclopedia/03.jpg',
+                bgColor: '#765C4E'
+            },
+            {
+                id: 4,
+                category: '爬蟲類',
+                categoryEn: 'Reptiles',
+                name: '爬蟲類寵物',
+                description: '爬蟲類寵物如蛇、蜥蜴和龜都是獨特而迷人的寵物選擇。它們需要特定的棲息環境、溫度控制和飲食。養爬蟲寵物需要更多的專業知識和準備，但它們可以提供獨特的飼養體驗。',
+                image: './picture/7 encyclopedia/encyclopedia/04.jpg',
+                bgColor: '#F2ECE4'
+            },
+            {
+                id: 5,
+                category: '水族類',
+                categoryEn: 'Aquatics & Amphibians',
+                name: '水族類寵物',
+                description: '水族類寵物包括魚類、烏龜和其他水生動物。養殖水族類寵物需要建立適當的水環境和定期維護。這些寵物提供了獨特的觀賞價值，並可以帶來平靜和放鬆的感受。',
+                image: './picture/7 encyclopedia/encyclopedia/05.jpg',
+                bgColor: '#BDAB9B'
+            }
+        ];
+
+        // 渲染寵物卡片
+        function renderPets(pets) {
+            const container = document.getElementById('petContainer');
+            container.innerHTML = '';
+
+            if (!pets || pets.length === 0) {
+                container.innerHTML = '<p style="text-align:center;color:#999;padding:40px;">找不到相關寵物品種</p>';
+                return;
+            }
+
+            pets.forEach((pet, index) => {
+                const petItem = document.createElement('div');
+                petItem.className = 'pet-item' + (index % 2 === 1 ? ' reverse' : '');
+
+                // 決定文字顏色與按鈕樣式
+                // const bg = pet.bgColor || '#F2ECE4';
+                // const textColor = (bg.toUpperCase() === '#765C4E') ? '#ffffff' : '#333333';
+                // // 按鈕：若背景為深色則用白底深字；否則使用深色底白字
+                // let btnBg, btnText;
+                // if (bg.toUpperCase() === '#765C4E') {
+                //     btnBg = '#FFFFFF';
+                //     btnText = '#765C4E';
+                // } else {
+                //     btnBg = '#765C4E';
+                //     btnText = '#FFFFFF';
+                // }
+                const bg = pet.bgColor || '#F2ECE4';
+                const textColor = (bg.toUpperCase() === '#765C4E') ? '#ffffff' : '#333333';
+                const btnClass = (bg.toUpperCase() === '#765C4E') ? 'btn btn-a' : 'btn btn-c';
+
+                petItem.innerHTML = `
+                    <img src="${pet.image}" alt="${pet.name}" class="pet-image" onerror="this.src='./icon/avatar.png'">
+                   <div class="pet-content" style="background:${bg};color:${textColor};justify-content:space-between;">
+                        <div class="pet-category">${pet.categoryEn}</div>
+                        <div class="pet-title">${pet.category}</div>
+                        <div class="pet-description">${pet.description}</div>
+                       <a href="${pet.link || '#'}" class="${btnClass}">立即查看</a>
+                    </div>
+                `;
+
+                container.appendChild(petItem);
+            });
+        }
+
+        // 搜尋功能
+        // function performSearch() {
+        //     const searchInput = document.getElementById('searchInput');
+        //     const keyword = searchInput.value.trim().toLowerCase();
+
+        //     if (!keyword) {
+        //         renderPets(petData);
+        //     } else {
+        //         const filtered = petData.filter(pet =>
+        //             (pet.name && pet.name.toLowerCase().includes(keyword)) ||
+        //             (pet.category && pet.category.toLowerCase().includes(keyword)) ||
+        //             (pet.description && pet.description.toLowerCase().includes(keyword))
+        //         );
+        //         renderPets(filtered);
+        //     }
+        // }
+
+        // 初始化頁面
+        document.addEventListener('DOMContentLoaded', function () {
+            renderPets(petData);
+
+            //     // 搜尋事件
+            //     const searchInput = document.getElementById('searchInput');
+            //     if (searchInput) {
+            //         searchInput.addEventListener('keyup', performSearch);
+            //         searchInput.addEventListener('change', performSearch);
+            //     }
+        });
+    </script>
+</body>

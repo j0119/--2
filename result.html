@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配對結果 — 寵物合夥人</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./header.css">
+    <style>
+        :root {
+            --bg: #f9f8f6;
+            --bg-light: #f2ece4;
+            --dark-brown: #2a2018;
+            --medium-brown: #463730;
+            --btn-primary: #765c4e;
+            --btn-secondary: #bdab9b;
+            --btn-light: #d7cdc1;
+            --accent: #c9975b;
+            --text: #463730;
+            --text-muted: #96897b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text);
+        }
+
+
+        /* ── Progress Bar (step 4 complete) ── */
+        .result-progress {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 100px 0;
+        }
+
+        .steps-track {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .progress-pct {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent);
+            min-width: 72px;
+            text-align: right;
+        }
+
+        /* ── Result Main ── */
+        .result-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 100px 80px;
+        }
+
+        /* ── Page Header ── */
+        .result-header {
+            margin-bottom: 40px;
+        }
+
+        .result-label {
+            display: block;
+            font-size: 13px;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+
+        .result-title {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--dark-brown);
+            margin: 0 0 28px;
+        }
+
+        .result-tabs {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-tab {
+            padding: 12px 36px;
+            border-radius: 24px;
+            font-size: 15px;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+            border: 1.5px solid var(--btn-light);
+            background: transparent;
+            color: var(--text-muted);
+        }
+
+        .btn-tab:hover {
+            border-color: var(--btn-secondary);
+            color: var(--text);
+        }
+
+        .btn-tab.active {
+            background: var(--dark-brown);
+            border-color: var(--dark-brown);
+            color: #fff;
+        }
+
+        /* ── Two-column Layout ── */
+        .result-content {
+            display: flex;
+            gap: 64px;
+            align-items: flex-start;
+        }
+
+        /* ── Left: Radar Chart ── */
+        .result-chart-col {
+            flex: 0 0 460px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .chart-wrap {
+            width: 460px;
+            height: 460px;
+            background: #fff;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .chart-wrap canvas {
+            position: absolute;
+            inset: 0;
+        }
+
+        .chart-placeholder-text {
+            font-size: 14px;
+            color: var(--btn-light);
+            text-align: center;
+            line-height: 1.8;
+            pointer-events: none;
+        }
+
+        .chart-placeholder-text span {
+            display: block;
+            font-size: 32px;
+            margin-bottom: 8px;
+            opacity: 0.4;
+        }
+
+        .chart-note {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .chart-note strong {
+            color: var(--accent);
+        }
+
+        /* ── Right: Score Bars ── */
+        .result-scores-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            padding-top: 8px;
+        }
+
+        .score-item {}
+
+        .score-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 10px;
+        }
+
+        .score-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-brown);
+        }
+
+        .score-val {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-brown);
+        }
+
+        .score-track {
+            height: 8px;
+            background: var(--btn-light);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .score-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.8s ease;
+        }
+
+        .score-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <input type="checkbox" id="nav-control">
+    <div class="main-header">
+        <div><a class="logo" href="./index.html"><img src="./logo.png" alt="logo"></a></div>
+        <nav class="nav">
+
+            <ul class="nav-links">
+
+                <li><a class="btn-test" id="btn-test_explain" href="./test-explain.html">配對測驗</a></li>
+                <li><a class="btn-encyclopedia" id="btn-encyclopedia" href="./encyclopedia.html">寵物百科</a></li>
+                <li><a class="btn-index" id="btn-index" href="#">虛擬寵物</a></li>
+                <li><a class="btn-takeMeHome" id="btn-takeMeHome" href="#">帶我回家</a></li>
+                <li><a class="btn-comminicate" id="btn-comminicate" href="./comminicate.html">交流平台</a></li>
+                <li><a class="btn-login" id="btn-login" href="./login.html">登入</a></li>
+            </ul>
+        </nav>
+        <label for="nav-control" class="hb">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </label>
+    </div>
+
+    <!-- Progress (all 4 steps active = 100%) -->
+    <div class="result-progress">
+        <div class="steps-track">
+            <div class="step-circle">1</div>
+            <div class="step-line"></div>
+            <div class="step-circle">2</div>
+            <div class="step-line"></div>
+            <div class="step-circle">3</div>
+            <div class="step-line"></div>
+            <div class="step-circle">4</div>
+        </div>
+        <span class="progress-pct">100%</span>
+    </div>
+
+    <main>
+        <div class="result-wrap">
+
+            <!-- ── Page Header ── -->
+            <div class="result-header">
+                <span class="result-label">五面向分析</span>
+                <h1 class="result-title">你的配對分析</h1>
+                <div class="result-tabs">
+                    <button class="btn-tab active" id="tab-user">我的評分</button>
+                    <button class="btn-tab" id="tab-breed">品種特性</button>
+                </div>
+            </div>
+
+            <!-- ── Main Content ── -->
+            <div class="result-content">
+
+                <!-- Left: Radar Chart -->
+                <div class="result-chart-col">
+                    <div class="chart-wrap">
+                        <!-- Chart.js 將在這裡渲染雷達圖 -->
+                        <canvas id="radar-chart"></canvas>
+                        <div class="chart-placeholder-text" id="chart-placeholder">
+                            <span>🐾</span>
+                            完成測驗後<br>將顯示你的五面向分析圖
+                        </div>
+                    </div>
+                    <p class="chart-note">
+                        圖表顯示你在各面向的準備程度（滿分 9 分）<br>
+                        <strong>越接近外圈，代表你在該面向越適合飼養寵物</strong>
+                    </p>
+                </div>
+
+                <!-- Right: Score Bars -->
+                <div class="result-scores-col">
+
+                    <div class="score-item">
+                        <div class="score-head">
+                            <span class="score-name">環境</span>
+                            <span class="score-val" id="score-val-環境">--/9</span>
+                        </div>
+                        <div class="score-track">
+                            <div class="score-fill" id="score-bar-環境"></div>
+                        </div>
+                        <p class="score-desc" id="score-desc-環境">完成測驗後將顯示你的居住環境評分與說明。</p>
+                    </div>
+
+                    <div class="score-item">
+                        <div class="score-head">
+                            <span class="score-name">經濟</span>
+                            <span class="score-val" id="score-val-經濟">--/9</span>
+                        </div>
+                        <div class="score-track">
+                            <div class="score-fill" id="score-bar-經濟"></div>
+                        </div>
+                        <p class="score-desc" id="score-desc-經濟">完成測驗後將顯示你的經濟準備評分與說明。</p>
+                    </div>
+
+                    <div class="score-item">
+                        <div class="score-head">
+                            <span class="score-name">時間</span>
+                            <span class="score-val" id="score-val-時間">--/9</span>
+                        </div>
+                        <div class="score-track">
+                            <div class="score-fill" id="score-bar-時間"></div>
+                        </div>
+                        <p class="score-desc" id="score-desc-時間">完成測驗後將顯示你的時間充裕度評分與說明。</p>
+                    </div>
+
+                    <div class="score-item">
+                        <div class="score-head">
+                            <span class="score-name">包容力</span>
+                            <span class="score-val" id="score-val-包容力">--/9</span>
+                        </div>
+                        <div class="score-track">
+                            <div class="score-fill" id="score-bar-包容力"></div>
+                        </div>
+                        <p class="score-desc" id="score-desc-包容力">完成測驗後將顯示你的包容力評分與說明。</p>
+                    </div>
+
+                    <div class="score-item">
+                        <div class="score-head">
+                            <span class="score-name">穩定度</span>
+                            <span class="score-val" id="score-val-穩定度">--/9</span>
+                        </div>
+                        <div class="score-track">
+                            <div class="score-fill" id="score-bar-穩定度"></div>
+                        </div>
+                        <p class="score-desc" id="score-desc-穩定度">完成測驗後將顯示你的長期穩定度評分與說明。</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 col-md-4">
+                    <a class="nav_logo" href="./index.html"><img src="./logo.png" alt="logo"></a>
+                    <h3 class="footer-logo">寵物合夥人</h3>
+                    <p class="footer-tagline">每段陪伴，都值得被認真開始。</p>
+                </div>
+
+                <div class="col-4 col-md-4">
+                    <h4 class="footer-section-title">聯絡我們</h4>
+                    <span class="footer-text">
+                        <p>服務時間：09:00 - 18:00
+                        <p>聯絡信箱：qwwerrt@gmail.com
+                        <p>聯絡電話：0900000000
+                    </span>
+                </div>
+
+                <div class="col-4 col-md-4 footer-links">
+                    <h4 class="footer-section-title">快速連結</h4>
+                    <ul class="footer-links">
+                        <li><a class="btn-test" id="btn-test_explain" href="./test-explain.html">配對測驗</a></li>
+                        <li><a class="btn-encyclopedia" id="btn-encyclopedia" href="./encyclopedia.html">寵物百科</a></li>
+                        <li><a class="btn-index" id="btn-index" href="#">虛擬寵物</a></li>
+                        <li><a class="btn-takeMeHome" id="btn-takeMeHome" href="#">帶我回家</a></li>
+                        <li><a class="btn-comminicate" id="btn-comminicate" href="./comminicate.html">交流平台</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-12">
+                    <div class="footer-bottom">
+                        © 2026 寵物合夥人．All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+    <script src="./chart.umd.min.js"></script>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+
+
+    <!--
+        ── 之後加入的 JS 區塊 ──
+        1. 引入 Chart.js：
+           <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        2. 引入評分邏輯：
+           <script src="./quiz.js"></script>
+
+        quiz.js 的工作：
+        - 從 localStorage.getItem('petQuizScores') 讀取分數
+        - 更新 #score-val-XX、#score-bar-XX、#score-desc-XX
+        - 用 Chart.js 在 #radar-chart 渲染雷達圖
+        - 隱藏 #chart-placeholder
+    -->
+
+</body>
+
+</html>

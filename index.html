@@ -1,255 +1,596 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>寵物合夥人｜每段陪伴都值得被認真開始</title>
-
-    <link rel="icon" href="./logo.png" type="image/png">
-    <link rel="stylesheet" href="header.css">
-
+    <title>寵物合夥人首頁</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./header.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        :root {
+            --white: #ffffff;
+            --light: #f2ece4;
+            --dark: #765c4e;
+            --grayscale: #d7cdc1;
+            --standout: #c9975b;
+            --text: #463730;
+            --dark-brown: #2a2018;
+
+
+
+            --medium-brown: #463730;
+            --btn-secondary: #bdab9b;
+            --text-muted: #96897b;
         }
 
-        .frontpage {
-            background-color: #E8D1BF;
+
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--light);
+            color: var(--text);
         }
 
-        h2,
-        p {
-            text-align: center;
-            margin: 70px 180px;
-        }
-
-
-        .banner {
-            width: 100%;
-
-            overflow: hidden;
+        /* ── Hero ── */
+        .hero {
             position: relative;
-        }
-
-        .banner img {
-            width: 100%;
-            height: 600px;
-            object-fit: cover;
-            /* 圖片等比例縮放不變形 */
-
-        }
-
-        h1 {
-            position: absolute;
-            top: 50px;
-            left: 50px;
-            margin: 0;
-
-        }
-
-        .text1 {
-            position: absolute;
-            bottom: 50px;
-            right: 50px;
-            width: 45%;
-            min-width: 300px;
-            margin: 0;
-            font-size: 24px;
-            font-weight: normal;
-        }
-
-        .card1 {
+            min-height: 600px;
             display: flex;
             align-items: center;
-            background-color: #C9975B;
-            margin: auto;
+            padding: clamp(40px, 8vw, 80px) clamp(24px, 5vw, 48px);
+            background-color: var(--grayscale);
+
         }
 
-        .content1 {
-            flex: 1;
-            padding: 40px;
+        .hero-content {
+            max-width: 520px;
+            z-index: 1;
         }
 
-        .content1title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #FFFEFE;
+        .hero h1 {
+            color: var(--text);
+            line-height: 1.4;
+            margin-bottom: 24px;
         }
 
-        .content1text {
-            font-size: 16px;
-            font-weight: 400;
-            color: #FFFEFE;
+        .hero p {
+
+            color: var(--dark);
+            line-height: 1.9;
+            margin-bottom: 40px;
+
         }
 
-        .card1img {
-            flex: 1;
-            height: 100%;
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
         }
 
-        .content2 {
-            width: 100%;
-            max-width: 800px;
-            position: relative;
-            text-align: center;
-        }
 
-        .content2 img {
-            width: 100%;
-            height: auto;
-        }
-
-        .content2 h2 {
+        .hero-image-wrap {
             position: absolute;
-            bottom: 40px;
-            left: 50px;
-            color: #FFFEFE
+            right: 0;
+            bottom: 0;
+            height: 80%;
+            width: 50%;
+            overflow: hidden;
         }
 
+        .hero-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
 
-        .step {
+        @media screen and (width < 768px) {
+            .hero {
+                flex-direction: column;
+                min-height: auto;
+                padding: 40px 24px 0px 24px;
+                align-items: stretch;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+                gap: 24px;
+                margin-bottom: 30px;
+            }
+
+            .hero-image-wrap {
+                position: static;
+                width: 100%;
+                height: 250px;
+            }
+        }
+
+        /* ── Sections shared ── */
+        .steps-section {
+            padding-block: 60px;
+        }
+
+        .steps-wrapper {
             display: flex;
             flex-direction: column;
         }
 
-        .stepbox {
-            display: flex;
+
+        .step-card.row {
+            padding-block: 36px;
+            background: transparent;
             align-items: center;
         }
 
-        .stepbox img {
-            width: 500px;
-            height: 600px;
+        .step-number {
+            font-size: 56px;
+            font-weight: 700;
+            color: var(--standout);
+            line-height: 1;
         }
 
-        .steptext {
-            padding: 100px;
+        .step-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark-brown, #4a3525);
+            margin-top: 6px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.8;
         }
 
 
 
-        .news {
-            display: block;
-            margin: 100px;
-            padding: 40px;
-            text-decoration: none;
+        @media (max-width: 767px) {
+            .step-card.row {
+                text-align: center;
+                gap: 16px;
+            }
         }
 
-        li {
-            border-bottom: 1px solid #000;
-            padding: 10px 0;
+
+        /* ── 專業後盾 ── */
+        .experts-section {
+            background: var(--dark);
+            padding-block: 60px;
         }
 
-        li:first-child {
-            border-top: 1px solid #000;
+        .section-label {
+            color: var(--text);
+        }
+
+        .experts-section .section-title {
+            color: var(--white);
+        }
+
+        .experts-section .section-subtitle {
+            color: var(--standout);
+            margin-bottom: 40px;
+        }
+
+
+        .experts-section .row {
+            align-items: stretch;
+        }
+
+        .expert-card {
+            background: var(--text);
+            border-radius: 20px;
+            padding: 36px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .expert-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .expert-role {
+            font-size: 12px;
+            color: var(--standout);
+            line-height: 1.5;
+        }
+
+        .expert-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .expert-desc {
+            font-size: 14px;
+            color: var(--light);
+            line-height: 1.8;
+            margin-top: 4px;
+        }
+
+        .experts-section .col-12 {
+            display: flex;
+        }
+
+        @media screen and (width < 768px) {
+            .expert-card {
+                margin-bottom: 16px;
+            }
+        }
+
+
+        /* ── 最新消息 ── */
+        @media screen and (width >=768px) {
+            .news-nav {
+                display: none;
+            }
+        }
+
+        .news-section {
+            background: var(--light);
+            padding-block: 60px;
+        }
+
+        .news-section .section-title {
+            margin-bottom: 40px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        .news-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(42, 32, 24, 0.1);
+        }
+
+        .news-date {
+            font-size: 12px;
+            color: var(--text);
+        }
+
+        .news-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .news-tag {
+            display: inline-block;
+            background: var(--grayscale);
+            color: var(--text);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            align-self: flex-start;
+            text-align: center;
+        }
+
+        @media screen and (width < 768px) {
+            .news-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 16px;
+            }
+
+            .news-card {
+                flex: 0 0 80%;
+                scroll-snap-align: start;
+            }
+
+            .news-section {
+                position: relative;
+            }
+
+            .news-nav {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                transform: translateY(-50%);
+                display: flex;
+                justify-content: space-between;
+                padding: 0 8px;
+                pointer-events: none;
+                z-index: 10;
+            }
+
+            .news-nav button {
+                pointer-events: auto;
+                background: transparent;
+                border: none;
+                font-size: 28px;
+                color: var(--dark);
+                cursor: pointer;
+            }
+
+            .news-nav button:disabled {
+                opacity: 0.3;
+                pointer-events: none;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div div class="frontpage">
-        <header>
-            <a class="logo" href="./index.html"><img src="./logo.png" alt="logo"></a>
+    <!-- <==========================導覽頁============================> -->
+    <input type="checkbox" id="nav-control">
+    <div class="main-header">
+        <div><a class="logo" href="./index.html"><img src="./logo.png" alt="logo"></a></div>
+        <nav class="nav">
 
-            <nav>
+            <ul class="nav-links">
 
-                <a href="./test.html">配對測驗</a>
-                <a href="./take me home.html">帶我回家</a>
-                <a href="./comminicate.html">交流平台</a>
-                <a href="#">寵物百科</a>
-                <a href="#">登入</a>
-            </nav>
-        </header>
-        <div class="banner">
-            <img src="./picture/animal/pexels-cup-of-couple-8473723.jpg" alt="">
-
-
-            <h1>每段陪伴，都值得被認真開始</h1>
-
-            <div class="text1">
-
-                <p>這裡不只是個網站，而是一個人與毛孩相遇的溫暖起點。 我們相信，養寵物不是一場單向的收容，而是兩顆心決定相伴前行的「人生合夥」。
-                    你的合夥人不會說話，但牠會用一輩子的忠誠與愛，參與你的喜怒哀樂。<br>
-                    無論你是渴望陪伴的新手、想尋找第二隻毛孩的老手， 還是正等待被看見的浪浪與動物們， 「寵物合夥人」將陪著你們，寫下最完美的相遇故事。</p>
-            </div>
-        </div>
-        <div class="card1">
-            <div class="content1">
-                <h3 class="content1title">飼主　X　機構　X　專家</h3>
-
-
-                <p class="content1text">
-                    在這裡，飼主可以自由分享飼養日常、交流經驗，並在溫暖的社群中獲得情感支持與新手建議；機構能輕鬆上架待認養毛孩的健康與個性資訊，公開認養流程並持續追蹤後續狀況；同時，專家也將進駐解答各類照護與行為問題、分享專業文章，並協助設計趣味測驗。無論你是想尋找新家人、解決飼養疑難雜症，還是想分享毛孩的可愛瞬間，這裡都是你最強大的後盾！
-                </p>
-            </div>
-
-            <div class="card1img"><img src="./picture/figma/Component 17.png" alt=""></div>
-        </div>
-        <div class="content2">
-            <img src="./picture/figma/Component 1.jpg">
-            <h2>誰才是你的最佳合夥人呢?</h2>
-        </div>
-
-
-        <div class="step">
-            <div class="stepbox">
-                <img src="./picture/people/pexels-mikhail-nilov-9159043.jpg" alt="">
-
-                <div class="steptext">
-                    <h2>1. 配對測驗</h2>
-                    <span>透過趣味且專業的性格與生活型態問卷，深入分析您的居住環境、時間分配與個性特質，精準推薦最適合與您共度未來的理想寵物物種與個性類型。</span>
-                </div>
-            </div>
-            <div class="stepbox"><img src="./picture/people/pexels-cottonbro-5895028.jpg" alt="">
-                <div class="steptext">
-                    <h2>2. 寵物百科</h2>
-                    <span>針對測驗推薦的寵物結果，提供完整的品種知識、照護須知與基本開銷評估，讓您在動心之餘，更能全方位建立正確的飼養認知。</span>
-                </div>
-            </div>
-            <div class="stepbox"><img src="./picture/people/pexels-fr3nks-343241.jpg" alt="">
-                <div class="steptext">
-                    <h2>3. 虛擬寵物</h2>
-                    <span>認養前的超擬真體驗！透過線上定期餵食、互動與突發狀況模擬，讓您在無負擔的環境下，親身感受真實飼養的生活節奏，藉此評估自己是否已做好照顧新生命的準備。</span>
-                </div>
-            </div>
-            <div class="stepbox"><img src="./picture/people/pexels-mikhail-nilov-7474467.jpg" alt="">
-                <div class="steptext">
-                    <h2>4. 帶我回家</h2>
-                    <span>幸福媒合的最後一哩路！串聯各大合法機構與流浪動物之家，將虛擬體驗轉化為真實行動，讓您直接瀏覽待認養毛孩的真實資訊與健康狀況，順利找到彼此相伴的終生夥伴。</span>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="news">
-            <h2>最新消息</h2>
-            <ul>
-                <li><a href="">政府寵物政策</a></li>
-                <li><a href="">動保法更新</a></li>
-                <li> <a href="">結紮補助</a></li>
-                <li><a href="">寵物展資訊</a></li>
-                <li><a href="">認養活動</a></li>
-                <li><a href="">疫苗公告</a></li>
+                <li><a class="btn-test" id="btn-test_explain" href="./test-explain.html">配對測驗</a></li>
+                <li><a class="btn-encyclopedia" id="btn-encyclopedia" href="./encyclopedia.html">寵物百科</a></li>
+                <li><a class="btn-index" id="btn-index" href="#">虛擬寵物</a></li>
+                <li><a class="btn-takeMeHome" id="btn-takeMeHome" href="#">帶我回家</a></li>
+                <li><a class="btn-comminicate" id="btn-comminicate" href="./comminicate.html">交流平台</a></li>
+                <li><a class="btn-login" id="btn-login" href="./login.html">登入</a></li>
             </ul>
+        </nav>
+        <label for="nav-control" class="hb">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </label>
+    </div>
+
+
+    <!-- <===============================hero============================> -->
+    <section class="hero">
+
+        <div class="hero-content">
+            <h1>每段陪伴，<br>都值得被認真開始</h1>
+            <p>透過科學化測驗與虛擬飼養體驗，在認養之前，<br>先確認你們真的適合彼此。</p>
+            <div class="hero-buttons">
+
+                <a class="btn btn-c" href="./test_explain.html">開始測驗</a>
+                <a class="btn btn-a" href="#">帶我回家</a>
+
+            </div>
+        </div>
+        <div class="hero-image-wrap">
+            <img src="./picture/1 index/dreamina-2026-06-17-4353-Close-up of the golden retriever puppy f...-Photoroom (1).png"
+                alt="">
         </div>
 
+    </section>
+
+    <!--==============================四步驟=================================== -->
+    <section class="steps-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="steps-title">走完四個步驟</h2>
+                    <p class="steps-text">一份量身訂製的寵物建議、真實的飼養體驗感受，以及一隻等著你的毛孩。</p>
+                </div>
+            </div>
+            <div class="steps-wrapper">
+
+                <div class="step-card row">
+                    <div class="col-12 col-md-2">
+                        <div class="step-number">01</div>
+
+                        <div class="step-title">了解自己</div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <p class="step-desc">回答關於居住空間、作息與個性的問題，系統幫你找出最契合的寵物種類與品種。</p>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <a class="btn btn-b" href="./test-explain.html">開始測驗</a>
+                    </div>
+                </div>
+
+                <div class="step-card row">
+                    <div class="col-12 col-md-2">
+                        <div class="step-number">02</div>
+
+                        <div class="step-title">深入認識</div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <p class="step-desc">依測驗結果直通推薦品種的專屬頁面，了解牠的個性、照護需求與日常習性。</p>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <a class="btn btn-c" href="./encyclopedia.html">開始瀏覽</a>
+                    </div>
+                </div>
+                <div class="step-card row">
+                    <div class="col-12 col-md-2">
+                        <div class="step-number">03</div>
+
+                        <div class="step-title">實際體驗</div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <p class="step-desc">透過線上互動模擬真實日常，在零壓力的環境下確認自己是否真的準備好了。</p>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <a class="btn btn-b" href="#">體驗飼養</a>
+                    </div>
+                </div>
+                <div class="step-card row">
+                    <div class="col-12 col-md-2">
+                        <div class="step-number">04</div>
+
+                        <div class="step-title">正式相遇</div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <p class="step-desc">與合作的收容中心及認養機構媒合，讓等待中的毛孩找到最適合牠的家。</p>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <a class="btn btn-c" href="#">帶我回家</a>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
 
 
 
+    <!--=============================專業後盾==================================-->
+    <section class="experts-section">
+        <div class="container">
+            <div class="section-label">Professional Team</div>
+            <h2 class="section-title">專業後盾</h2>
+            <p class="section-subtitle">每個答案背後，都有專家在</p>
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="expert-card">
+                        <div><img src="./picture/1 index/professionals/1.png" alt=""></div>
+                        <div class="expert-role">小動物臨床獸醫・執業 12 年</div>
+                        <div class="expert-name">林宜潔 獸醫師</div>
+                        <div class="expert-desc">專精貓犬內科與預防醫學，負責審核配對測驗的健康相關題目，並在交流平台回覆醫療諮詢。</div>
+
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="expert-card">
+                        <div><img src="./picture/1 index/professionals/3.png" alt=""></div>
+                        <div class="expert-role">寵物營養顧問・著有《毛孩食育》</div>
+                        <div class="expert-name">張雅婷 動物營養師</div>
+                        <div class="expert-desc">專注於不同生命階段的飲食規劃，負責寵物百科中的飲食與照護內容審訂。</div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="expert-card">
+                        <div><img src="./picture/1 index/professionals/2.png" alt=""></div>
+                        <div class="expert-role">動物行為諮詢師・IAABC 認證</div>
+                        <div class="expert-name">陳建宏 行為專家</div>
+                        <div class="expert-desc">擅長分離焦慮、攻擊行為矯正，協助設計測驗中的「生活適配度」題組，讓配對結果更精準。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
+    <!-- ── 最新消息 ── -->
+    <section class="news-section">
+        <div class="container">
+            <h2 class="section-title">最新消息</h2>
+            <div class="news-nav">
+                <button id="newsPrev">‹</button>
+                <button id="newsNext">›</button>
+            </div>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-date">2026-05-19</div>
+                    <div class="news-title">週末愛心犬貓認養會開跑</div>
+                    <span class="news-tag">認養活動</span>
+                </div>
+                <div class="news-card">
+                    <div class="news-date">2026-05-30</div>
+                    <div class="news-title">政府寵物政策最新公告</div>
+                    <span class="news-tag">政府寵物政策</span>
+                </div>
+                <div class="news-card">
+                    <div class="news-date">2026-06-03</div>
+                    <div class="news-title">動保法修法：提高棄養罰鍰</div>
+                    <span class="news-tag">動保法更新</span>
+                </div>
+                <div class="news-card">
+                    <div class="news-date">2026-06-08</div>
+                    <div class="news-title">全台毛孩絕育補助開跑</div>
+                    <span class="news-tag">補助公告</span>
+                </div>
+                <div class="news-card">
+                    <div class="news-date">2026-06-15</div>
+                    <div class="news-title">國際寵物用品展週末登場</div>
+                    <span class="news-tag">寵物展資訊</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    </div>
-    <footer>
-        <div class="footertext">
-            <p>連絡電話: 09123456789 聯絡信箱:aaaaaaaaaa@gmail.地址:oo路xx號</p>
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-4 col-md-4">
+                    <a class="nav_logo" href="./index.html"><img src="./logo.png" alt="logo"></a>
+                    <h3 class="footer-logo">寵物合夥人</h3>
+                    <p class="footer-tagline">每段陪伴，都值得被認真開始。</p>
+                </div>
 
+                <div class="col-4 col-md-4">
+                    <h4 class="footer-section-title">聯絡我們</h4>
+                    <span class="footer-text">
+                        <p>服務時間：09:00 - 18:00
+                        <p>聯絡信箱：qwwerrt@gmail.com
+                        <p>聯絡電話：0900000000
+                    </span>
+                </div>
 
+                <div class="col-4 col-md-4 footer-links">
+                    <h4 class="footer-section-title">快速連結</h4>
+                    <ul class="footer-links">
+                        <li><a class="btn-test" id="btn-test_explain" href="./test-explain.html">配對測驗</a></li>
+                        <li><a class="btn-encyclopedia" id="btn-encyclopedia" href="./encyclopedia.html">寵物百科</a></li>
+                        <li><a class="btn-index" id="btn-index" href="#">虛擬寵物</a></li>
+                        <li><a class="btn-takeMeHome" id="btn-takeMeHome" href="#">帶我回家</a></li>
+                        <li><a class="btn-comminicate" id="btn-comminicate" href="./comminicate.html">交流平台</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-12">
+                    <div class="footer-bottom">
+                        © 2026 寵物合夥人．All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
-    </div>
+    <script>
+
+        const newsGrid = document.querySelector('.news-grid');
+        const cardWidth = document.querySelector('.news-card').offsetWidth + 16;
+        const prevBtn = document.getElementById('newsPrev');
+        const nextBtn = document.getElementById('newsNext');
+
+        function updateButtons() {
+            const maxScroll = newsGrid.scrollWidth - newsGrid.clientWidth;
+            prevBtn.disabled = newsGrid.scrollLeft <= 0;
+            nextBtn.disabled = newsGrid.scrollLeft >= maxScroll - 1;
+        }
+
+        nextBtn.onclick = () => {
+            newsGrid.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        };
+
+        prevBtn.onclick = () => {
+            newsGrid.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        };
+
+        newsGrid.addEventListener('scroll', updateButtons);
+        window.addEventListener('load', updateButtons);
+    </script>
+
+
 </body>
 
 </html>
