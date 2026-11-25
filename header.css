@@ -535,3 +535,10 @@ a {
 
 
 }
+
+/* 目前所在頁面的選單項目 */
+.nav-links a[aria-current="page"],
+.footer-links a[aria-current="page"] {
+    color: var(--standout);
+    font-weight: 700;
+}

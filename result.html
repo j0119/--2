@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>配對結果 — 寵物合夥人</title>
+    <script src="./layout.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./header.css">
@@ -259,28 +260,12 @@
 </head>
 
 <body>
+<!-- <==========================導覽頁============================> -->
+    
+<div id="site-header"></div>
 
-    <input type="checkbox" id="nav-control">
-    <div class="main-header">
-        <div><a class="logo" href="./index.html"><img src="./logo.png" alt="logo"></a></div>
-        <nav class="nav">
+<!-- <==========================內容============================> -->
 
-            <ul class="nav-links">
-
-                <li><a class="btn-test" id="btn-test_explain" href="./test-explain.html">配對測驗</a></li>
-                <li><a class="btn-encyclopedia" id="btn-encyclopedia" href="./encyclopedia.html">寵物百科</a></li>
-                <li><a class="btn-index" id="btn-index" href="#">虛擬寵物</a></li>
-                <li><a class="btn-takeMeHome" id="btn-takeMeHome" href="#">帶我回家</a></li>
-                <li><a class="btn-comminicate" id="btn-comminicate" href="./comminicate.html">交流平台</a></li>
-                <li><a class="btn-login" id="btn-login" href="./login.html">登入</a></li>
-            </ul>
-        </nav>
-        <label for="nav-control" class="hb">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </label>
-    </div>
 
     <!-- Progress (all 4 steps active = 100%) -->
     <div class="result-progress">
@@ -392,43 +377,8 @@
         </div>
     </main>
 
-    <footer class="main-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-4 col-md-4">
-                    <a class="nav_logo" href="./index.html"><img src="./logo.png" alt="logo"></a>
-                    <h3 class="footer-logo">寵物合夥人</h3>
-                    <p class="footer-tagline">每段陪伴，都值得被認真開始。</p>
-                </div>
-
-                <div class="col-4 col-md-4">
-                    <h4 class="footer-section-title">聯絡我們</h4>
-                    <span class="footer-text">
-                        <p>服務時間：09:00 - 18:00
-                        <p>聯絡信箱：qwwerrt@gmail.com
-                        <p>聯絡電話：0900000000
-                    </span>
-                </div>
-
-                <div class="col-4 col-md-4 footer-links">
-                    <h4 class="footer-section-title">快速連結</h4>
-                    <ul class="footer-links">
-                        <li><a class="btn-test" id="btn-test_explain" href="./test-explain.html">配對測驗</a></li>
-                        <li><a class="btn-encyclopedia" id="btn-encyclopedia" href="./encyclopedia.html">寵物百科</a></li>
-                        <li><a class="btn-index" id="btn-index" href="#">虛擬寵物</a></li>
-                        <li><a class="btn-takeMeHome" id="btn-takeMeHome" href="#">帶我回家</a></li>
-                        <li><a class="btn-comminicate" id="btn-comminicate" href="./comminicate.html">交流平台</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-12">
-                    <div class="footer-bottom">
-                        © 2026 寵物合夥人．All rights reserved.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+<!-- <==========================頁尾============================> -->
+    <div id="site-footer"></div>
 
     <script src="./chart.umd.min.js"></script>
     <script>
