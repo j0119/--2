@@ -12,6 +12,10 @@
     --grayscale: #d7cdc1;
     --standout: #c9975b;
     --text: #463730;
+    --dark-brown: #2a2018;
+    --medium-brown: #463730;
+    --text-muted: #e6ddd2;
+    --error: #c0392b;
     --section-padding-y: clamp(40px, 8vw, 80px);
     --section-padding-x: clamp(24px, 5vw, 48px);
 }

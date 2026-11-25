@@ -102,7 +102,7 @@
         .section-chip {
             display: inline-block;
             background: var(--grayscale);
-            color: var(--btn-primary);
+            color: var(--text);
             padding: 8px 20px;
             border-radius: 8px;
             font-size: 14px;
@@ -130,6 +130,17 @@
             border-radius: 16px;
             padding: 28px 36px;
             margin-bottom: 10px;
+        }
+
+                .question-card.unanswered {
+            outline: 2px solid var(--error);
+        }
+
+        .question-card.unanswered h3::after {
+            content: '（請選擇一個答案）';
+            color: var(--error);
+            font-size: 14px;
+            font-weight: 400;
         }
 
         .question-card h3 {
@@ -285,13 +296,13 @@
 
                 <div class="question-card">
                     <h3>Q3　你每月可以用在寵物上的預算大約是？</h3>
-                    <label class="q-option"><input type="radio" name="q3" data-dim="經濟" data-pts="2"><span
+                    <label class="q-option"><input type="radio" name="q3" data-dim="經濟" data-pts="0"><span
                             class="q-radio"></span><span>3,000 元以下</span></label>
-                    <label class="q-option"><input type="radio" name="q3" data-dim="經濟" data-pts="5"><span
+                    <label class="q-option"><input type="radio" name="q3" data-dim="經濟" data-pts="1"><span
                             class="q-radio"></span><span>3,000 - 6,000 元</span></label>
-                    <label class="q-option"><input type="radio" name="q3" data-dim="經濟" data-pts="7"><span
+                    <label class="q-option"><input type="radio" name="q3" data-dim="經濟" data-pts="2"><span
                             class="q-radio"></span><span>6,000 - 10,000 元</span></label>
-                    <label class="q-option"><input type="radio" name="q3" data-dim="經濟" data-pts="9"><span
+                    <label class="q-option"><input type="radio" name="q3" data-dim="經濟" data-pts="3"><span
                             class="q-radio"></span><span>10,000 元以上</span></label>
                 </div>
 
@@ -330,8 +341,8 @@
 
                 <div class="section-header">
                     <span class="section-chip">第二部分　共五題</span>
-                    <h1 class="section-title">生活作息與精力分配</h1>
-                    <p class="section-desc">了解你的日常生活節奏，找出最適合你作息的寵物夥伴。</p>
+                    <h1 class="section-title">生活作息與照護準備</h1>
+                    <p class="section-desc">了解你的日常生活節奏，以及面對突發狀況的照護規劃，找出最適合你的寵物夥伴。</p>
                 </div>
 
                 <div class="question-card">
@@ -371,27 +382,27 @@
                 </div>
 
                 <div class="question-card">
-                    <h3>Q9　你在家時通常喜歡做什麼？</h3>
-                    <label class="q-option"><input type="radio" name="q9"><span
-                            class="q-radio"></span><span>安靜閱讀、看電視或工作</span></label>
-                    <label class="q-option"><input type="radio" name="q9"><span
-                            class="q-radio"></span><span>小幅度的家事或休閒</span></label>
-                    <label class="q-option"><input type="radio" name="q9"><span
-                            class="q-radio"></span><span>在家做運動或較活躍的活動</span></label>
-                    <label class="q-option"><input type="radio" name="q9"><span
-                            class="q-radio"></span><span>常在陽台或室外活動</span></label>
+                    <h3>Q9　若寵物突然生病、受傷，或需要定期保健、處方飲食，你的財務承受度如何？</h3>
+                    <label class="q-option"><input type="radio" name="q9" data-dim="經濟" data-pts="0"><span
+                            class="q-radio"></span><span>幾乎無法負擔額外醫療費，會感到很大壓力</span></label>
+                    <label class="q-option"><input type="radio" name="q9" data-dim="經濟" data-pts="1"><span
+                            class="q-radio"></span><span>只能負擔幾千元的基礎看診或拿藥</span></label>
+                    <label class="q-option"><input type="radio" name="q9" data-dim="經濟" data-pts="2"><span
+                            class="q-radio"></span><span>有存一點備用金，可應付一般檢查、疫苗或中度醫療</span></label>
+                    <label class="q-option"><input type="radio" name="q9" data-dim="經濟" data-pts="3"><span
+                            class="q-radio"></span><span>有獨立的寵物醫療預備金或保險規劃，能從容應對高昂醫療費</span></label>
                 </div>
 
                 <div class="question-card">
-                    <h3>Q10　如果你要出遠門，寵物的照顧怎麼安排？</h3>
-                    <label class="q-option"><input type="radio" name="q10"><span
-                            class="q-radio"></span><span>有家人或室友可以幫忙</span></label>
-                    <label class="q-option"><input type="radio" name="q10"><span
-                            class="q-radio"></span><span>可以交給附近的朋友</span></label>
-                    <label class="q-option"><input type="radio" name="q10"><span
-                            class="q-radio"></span><span>會送去寵物旅館</span></label>
-                    <label class="q-option"><input type="radio" name="q10"><span
-                            class="q-radio"></span><span>目前沒有解決方案</span></label>
+                    <h3>Q10　如果遇到出遠門或突發狀況，你對「寄宿或代養花費」的接受與準備程度？</h3>
+                    <label class="q-option"><input type="radio" name="q10" data-dim="經濟" data-pts="0"><span
+                            class="q-radio"></span><span>完全沒有預算，也不確定怎麼安排</span></label>
+                    <label class="q-option"><input type="radio" name="q10" data-dim="經濟" data-pts="1"><span
+                            class="q-radio"></span><span>沒有額外預算，但有親友可免費支援照顧</span></label>
+                    <label class="q-option"><input type="radio" name="q10" data-dim="經濟" data-pts="2"><span
+                            class="q-radio"></span><span>有準備少許預算，可負擔短天期寵物旅館或一般代養</span></label>
+                    <label class="q-option"><input type="radio" name="q10" data-dim="經濟" data-pts="3"><span
+                            class="q-radio"></span><span>有充足的寄宿預算，也能負擔專業保母或較長期的照顧費用</span></label>
                 </div>
 
                 <div class="quiz-nav">
@@ -523,11 +534,38 @@
             window.location.href = './result.html';
         }
 
-        document.getElementById('btn-next-1').addEventListener('click', () => go(2));
+        // 檢查第 n 部分是否每題都已作答；沒答完就標示出來，並捲到第一題沒答的題目
+        function checkSection(n) {
+            const cards = document.querySelectorAll('#section-' + n + ' .question-card');
+            let firstUnanswered = null;
+
+            cards.forEach(card => {
+                const answered = card.querySelector('input[type="radio"]:checked');
+                card.classList.toggle('unanswered', !answered);
+                if (!answered && !firstUnanswered) {
+                    firstUnanswered = card;
+                }
+            });
+
+            if (firstUnanswered) {
+                firstUnanswered.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return false;
+            }
+            return true;
+        }
+
+        // 選了答案之後，拿掉那一題的提示
+        document.addEventListener('change', e => {
+            if (e.target.matches('input[type="radio"]')) {
+                e.target.closest('.question-card').classList.remove('unanswered');
+            }
+        });
+
+        document.getElementById('btn-next-1').addEventListener('click', () => { if (checkSection(1)) go(2); });
         document.getElementById('btn-prev-2').addEventListener('click', () => go(1));
-        document.getElementById('btn-next-2').addEventListener('click', () => go(3));
+        document.getElementById('btn-next-2').addEventListener('click', () => { if (checkSection(2)) go(3); });
         document.getElementById('btn-prev-3').addEventListener('click', () => go(2));
-        document.getElementById('btn-next-3').addEventListener('click', saveAndRedirect);
+        document.getElementById('btn-next-3').addEventListener('click', () => { if (checkSection(3)) saveAndRedirect(); });
 
     </script>
 
